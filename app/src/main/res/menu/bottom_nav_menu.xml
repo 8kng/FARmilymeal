@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/HomeBtn"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home_text" />
+
+    <item
+        android:id="@+id/CalenderBtn"
+        android:icon="@drawable/ic_today_black_24dp"
+        android:title="@string/calender_text" />
+
+    <item
+        android:id="@+id/NotificationBtn"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/notification_text" />
+    <item
+        android:id="@+id/MessageBtn"
+        android:icon="@drawable/ic_message_black_24dp"
+        android:title="@string/message_text" />
+
+</menu>
