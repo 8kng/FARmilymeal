@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/HomeBtn">
 
-    <fragment
-        android:id="@+id/NotificationBtn"
-        android:name="mi191324.example.myapplication.ui.notifications.NotificationsFragment"
-        android:label="@string/notification_text"
-        tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/MessageBtn"
         android:name="mi191324.example.myapplication.MessageFragment"
@@ -25,4 +20,9 @@
         android:name="mi191324.example.myapplication.HomeFragment"
         android:label="@string/home_text"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/NotificationBtn"
+        android:name="mi191324.example.myapplication.NotificationFragment"
+        android:label="@string/notification_text"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
