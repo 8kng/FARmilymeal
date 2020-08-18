@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message_navigation.xml"
+    app:startDestination="@id/MessagecreateBtn">
+
+    <fragment
+        android:id="@+id/MessagecreateBtn"
+        android:name="mi191324.example.myapplication.MessagecreateFragment"
+        android:label="@string/Messagecreate_text"
+        tools:layout="@layout/fragment_messagecreate" />
+    <fragment
+        android:id="@+id/QuestioncreateBtn"
+        android:name="mi191324.example.myapplication.QuestioncreateFragment"
+        android:label="@string/Questioncreate_text"
+        tools:layout="@layout/fragment_questioncreate" />
+</navigation>
