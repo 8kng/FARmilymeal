@@ -10,17 +10,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="600dp"
-            android:background="#FFFFFF"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+            app:layout_constraintVertical_bias="1.0"></androidx.viewpager.widget.ViewPager>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.415"
-            app:menu="@menu/message_choose" />
+            app:tabBackground="@color/tab"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabTextColor="#FFFFFF">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/MessagecreateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                    android:text="メッセージ作成" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/QuestioncreateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="質問作成" />
+
+        </com.google.android.material.tabs.TabLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
