@@ -13,4 +13,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Messagecreate_text">メッセージ作成</string>
     <string name="Questioncreate_text">質問作成</string>
+    <string name="textmessage_text">テキストメッセージ</string>
+    <string name="voicemessage_text">音声メッセージ</string>
 </resources>
