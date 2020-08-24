@@ -40,8 +40,8 @@ class MessageFragment : Fragment() {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_message, container, false)
-        val ViewPager: ViewPager = view.findViewById(R.id.pager)
         val tablayout: TabLayout = view.findViewById(R.id.tab_layout)
+        val ViewPager: ViewPager = view.findViewById(R.id.pager)
         val adapter = Adapter(childFragmentManager, this)
 
         adapter.addFrag(MessagecreateFragment())
