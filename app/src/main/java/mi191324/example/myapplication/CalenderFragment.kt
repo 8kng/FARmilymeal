@@ -1,10 +1,12 @@
 package mi191324.example.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_calender.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,7 +18,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CalenderFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CalenderFragment : Fragment() {
+class CalenderFragment<Boolen> : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -27,6 +29,16 @@ class CalenderFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    fun CalenderSelect(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            R.id.calendarView ->{
+                FirstView.setImageResource(R.drawable.ic_today_black_24dp)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item!!)
     }
 
     override fun onCreateView(
@@ -49,7 +61,7 @@ class CalenderFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CalenderFragment().apply {
+            CalenderFragment<Any>().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
