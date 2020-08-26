@@ -24,20 +24,20 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="412dp"
+            android:layout_height="53dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@color/tab"
-            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorColor="@color/colorBackground"
             app:tabTextColor="#FFFFFF">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/MessagecreateBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                    android:text="メッセージ作成" />
+                android:text="メッセージ作成" />
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/QuestioncreateBtn"
