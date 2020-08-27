@@ -1,6 +1,9 @@
 package mi191324.example.myapplication
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,4 +27,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        val View =  super.onCreateView(name, context, attrs)
+        return View
+    }
 }
+

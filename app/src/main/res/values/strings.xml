@@ -15,4 +15,6 @@
     <string name="Questioncreate_text">質問作成</string>
     <string name="textmessage_text">テキストメッセージ</string>
     <string name="voicemessage_text">音声メッセージ</string>
+    <string name="send_text">送信</string>
+    <string name="livedo_text">例：体調はどうですか？</string>
 </resources>

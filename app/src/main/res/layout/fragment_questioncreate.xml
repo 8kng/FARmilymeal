@@ -24,20 +24,16 @@
                 android:layout_height="120dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/Question1View"
+                <EditText
+                    android:id="@+id/Question1editor"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
+                    android:ems="10"
+                    android:hint="@string/livedo_text"
                     android:inputType="text"
-                    android:text="質問1~~~" />
+                    android:text="今日はいかがおすごしですか?" />
 
-                <Button
-                    android:id="@+id/button21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="送信" />
             </LinearLayout>
 
             <LinearLayout
@@ -45,41 +41,15 @@
                 android:layout_height="120dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/Question2View"
+                <EditText
+                    android:id="@+id/Question2editor"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
-                    android:inputType="text"
-                    android:text="質問2~~~" />
-
-                <Button
-                    android:id="@+id/button20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="送信" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/Question3View"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:hint="例：今日の予定はありますか？"
+                    android:ems="10"
+                    android:hint="@string/livedo_text"
                     android:inputType="text" />
 
-                <Button
-                    android:id="@+id/button19"
-                    android:layout_width="65dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,40 +57,53 @@
                 android:layout_height="120dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/Question4View"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:text="TextView" />
-
-                <Button
-                    android:id="@+id/button18"
-                    android:layout_width="65dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/Question5View"
+                <EditText
+                    android:id="@+id/Question3editor"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
-                    android:inputType="text"
-                    android:text="TextView" />
+                    android:ems="10"
+                    android:hint="@string/livedo_text"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Question4editor"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:ems="10"
+                    android:hint="@string/livedo_text"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Question5editor"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:ems="10"
+                    android:hint="@string/livedo_text"
+                    android:inputType="textPersonName" />
 
                 <Button
-                    android:id="@+id/button13"
-                    android:layout_width="65dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/SendQuestionsBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:background="@android:drawable/ic_menu_send" />
 
             </LinearLayout>
         </LinearLayout>
