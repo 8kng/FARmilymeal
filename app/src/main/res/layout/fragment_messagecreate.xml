@@ -10,18 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.viewpager.widget.ViewPager
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/VoicemessageBtn"
+        <TextView
+            android:id="@+id/messagecreateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/voicemessage_text"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="300dp"
+            android:text="送信するメッセージを録音します"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/recordingBtn"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="200dp"
+            android:textOff="録音終了"
+            android:textOn="録音開始"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
