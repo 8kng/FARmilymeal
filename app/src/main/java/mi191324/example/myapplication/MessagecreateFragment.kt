@@ -1,10 +1,16 @@
 package mi191324.example.myapplication
 
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_messagecreate.*
+import java.io.File
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +26,11 @@ class MessagecreateFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var mp: MediaPlayer
+    lateinit var rec: MediaRecorder
+    lateinit var fl: File
+    val filePath: String = android.os.Environment.getExternalStorageDirectory().toString() + "/sample.wav"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +40,55 @@ class MessagecreateFragment : Fragment() {
         }
     }
 
+    private fun startRecord() {
+        var wavFile: File = File(filePath)
+        if (wavFile.exists()){
+            wavFile.delete()
+        }
+        try {
+            rec = MediaRecorder()
+            rec.setAudioSource(MediaRecorder.AudioSource.MIC)
+            rec.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
+            rec.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+            rec.setOutputFile(filePath)
+            rec.prepare()
+            rec.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun stopRecord() {
+        try {
+            rec.stop()
+            rec.reset()
+            rec.release()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun choose(){
+        if(recordingBtn.isChecked == true){
+            startRecord()
+        } else{
+            stopRecord()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val textmessage =  inflater.inflate(R.layout.fragment_messagecreate, container, false)
+        val View =  inflater.inflate(R.layout.fragment_messagecreate, container, false)
         // Inflate the layout for this fragment
-        return textmessage
+        val recordingBtn : ToggleButton = View.findViewById(R.id.recordingBtn)
+        val messagecreateView : View = View.findViewById(R.id.messagecreateView)
+
+        recordingBtn.setOnClickListener(){
+            choose()
+        }
+        return View
     }
 
     companion object {
