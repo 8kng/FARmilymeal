@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/image_view"
@@ -18,8 +18,8 @@
             android:id="@+id/text_view_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginLeft="6dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@id/image_view"
             android:layout_toRightOf="@id/image_view"
             android:text="Line1"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Line2"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@id/image_view"
             android:layout_below="@id/text_view_1"
             android:layout_toRightOf="@id/image_view"/>
