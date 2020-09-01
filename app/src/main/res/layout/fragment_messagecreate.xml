@@ -17,6 +17,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="300dp"
+            android:text="送信するメッセージを録音します"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,41 +36,35 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/PlayBtn"
+            android:id="@+id/playerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
             android:text="再生"
-            app:layout_constraintEnd_toStartOf="@+id/VoiceSendBtn"
+            app:layout_constraintEnd_toStartOf="@+id/VoisesendBtn"
+            app:layout_constraintHorizontal_bias="0.154"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recordingBtn" />
 
         <Button
-            android:id="@+id/VoiceSendBtn"
+            android:id="@+id/VoisesendBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
             android:text="送信"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/PlayBtn"
+            app:layout_constraintStart_toEndOf="@+id/playerBtn"
             app:layout_constraintTop_toBottomOf="@+id/recordingBtn" />
 
-        <TextView
+        <Chronometer
+            android:id="@+id/Timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
-            android:text="TextView"
+            android:textSize="70dp"
+            app:layout_constraintBottom_toTopOf="@+id/recordingBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/messagecreateView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

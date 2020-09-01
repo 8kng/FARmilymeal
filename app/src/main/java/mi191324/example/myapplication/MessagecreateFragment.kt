@@ -1,22 +1,26 @@
 package mi191324.example.myapplication
-
+import android.Manifest
+import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Chronometer
 import android.widget.ToggleButton
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
-import java.io.File
-
+import java.io.IOException
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [MessagecreateFragment.newInstance] factory method to
@@ -26,12 +30,12 @@ class MessagecreateFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var Boolen  = false
     lateinit var mp: MediaPlayer
-    lateinit var rec: MediaRecorder
-    lateinit var fl: File
-    val filePath: String = android.os.Environment.getExternalStorageDirectory().toString() + "/sample.wav"
-
-
+    private val recordPermission = Manifest.permission.RECORD_AUDIO
+    private val PERMISSION_CODE = 21
+    private var mediaRecorder: MediaRecorder? = null
+    private var recordFile: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,40 +43,63 @@ class MessagecreateFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
-    private fun startRecord() {
-        var wavFile: File = File(filePath)
-        if (wavFile.exists()){
-            wavFile.delete()
-        }
+    private fun startPlay(){
+        messagecreateView.setText("再生します")
+        recordFile = "filename.3gp"
+        val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         try {
-            rec = MediaRecorder()
-            rec.setAudioSource(MediaRecorder.AudioSource.MIC)
-            rec.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
-            rec.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-            rec.setOutputFile(filePath)
-            rec.prepare()
-            rec.start()
-        } catch (e: Exception) {
+            mp = MediaPlayer()
+            mp.setDataSource(recordPath + "/" + recordFile)
+            mp.prepare()
+            mp.start()
+        } catch (e: IOException) {
             e.printStackTrace()
         }
     }
-
-    private fun stopRecord() {
-        try {
-            rec.stop()
-            rec.reset()
-            rec.release()
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
-
     private fun choose(){
-        if(recordingBtn.isChecked == true){
-            startRecord()
+        if(recordingBtn.isChecked == true){  /*マイク使用許可とります*/
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.RECORD_AUDIO
+                ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED) {
+                val permissions = arrayOf(
+                    android.Manifest.permission.RECORD_AUDIO,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
+            } else {
+                Timer.setBase(SystemClock.elapsedRealtime())
+                Timer.start()
+                messagecreateView.setText("メッセージを録音しています")
+                recordFile = "filename.3gp"
+                val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
+                mediaRecorder = MediaRecorder()
+                mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC);
+                mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                mediaRecorder!!.setOutputFile(recordPath + "/" + recordFile);
+                mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+                try {
+                    mediaRecorder!!.prepare()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                mediaRecorder!!.start()
+            }
         } else{
-            stopRecord()
+            messagecreateView.setText("録音することができます")
+            Timer.stop()
+            try {
+                mediaRecorder!!.stop()
+                mediaRecorder!!.release()
+                mediaRecorder = null
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -84,10 +111,17 @@ class MessagecreateFragment : Fragment() {
         // Inflate the layout for this fragment
         val recordingBtn : ToggleButton = View.findViewById(R.id.recordingBtn)
         val messagecreateView : View = View.findViewById(R.id.messagecreateView)
+        val playerBtn : Button = View.findViewById(R.id.playerBtn)
+        val VoicesendBtn : Button = View.findViewById(R.id.VoisesendBtn)
+        val Timer : Chronometer = View.findViewById(R.id.Timer)
 
         recordingBtn.setOnClickListener(){
             choose()
         }
+        playerBtn.setOnClickListener(){
+            startPlay()
+        }
+
         return View
     }
 
