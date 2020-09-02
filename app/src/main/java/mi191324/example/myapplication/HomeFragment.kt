@@ -1,10 +1,12 @@
 package mi191324.example.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +31,28 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun generateDummyList(size: Int): List<ExampleItem>{
+        val List = ArrayList<ExampleItem>()
+        for (i in 0 until size) {
+            val drawable = R.drawable.ic_baseline_fastfood_24
+            val item = ExampleItem(drawable, "Item $i", "Line 2")
+            List += item
+        }
+        return List
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val View =  inflater.inflate(R.layout.fragment_home, container, false)
+        val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
+        val exampleList = generateDummyList(20)
+        recycler_view.adapter = HomeAdpter(exampleList)
+        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.setHasFixedSize(true)
+        return View
     }
 
     companion object {
