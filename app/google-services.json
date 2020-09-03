@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "868043115350",
+    "firebase_url": "https://farmily-meal.firebaseio.com",
+    "project_id": "farmily-meal",
+    "storage_bucket": "farmily-meal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868043115350:android:df60e5238d3d422a07e4f7",
+        "android_client_info": {
+          "package_name": "mi191324.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868043115350-o2t3ht94nb107400jbsvregtl2akvp1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMGWG3QsxSC8DmnVOy4xyR_OUk6AqszW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868043115350-o2t3ht94nb107400jbsvregtl2akvp1p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

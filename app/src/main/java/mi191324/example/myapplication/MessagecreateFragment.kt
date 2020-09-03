@@ -104,15 +104,9 @@ class MessagecreateFragment : Fragment() {
     }
 
     private fun sendvoice() {
+        val url = "https://console.cloud.google.com/storage/browser/familyanswer"
         recordFile = "filename.3gp"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
-        val stream = FileInputStream(File(recordPath + "/" + recordFile))
-        uploadTask = montainsRef.putStream(stream)
-        uploadTask.addOnFailureListener{
-
-        }.addOnSuccessListener{
-
-        }
     }
 
     override fun onCreateView(
