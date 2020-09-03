@@ -103,6 +103,18 @@ class MessagecreateFragment : Fragment() {
         }
     }
 
+    private fun sendvoice() {
+        recordFile = "filename.3gp"
+        val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
+        val stream = FileInputStream(File(recordPath + "/" + recordFile))
+        uploadTask = montainsRef.putStream(stream)
+        uploadTask.addOnFailureListener{
+
+        }.addOnSuccessListener{
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -120,6 +132,9 @@ class MessagecreateFragment : Fragment() {
         }
         playerBtn.setOnClickListener(){
             startPlay()
+        }
+        VoicesendBtn.setOnClickListener(){
+            sendvoice()
         }
 
         return View
