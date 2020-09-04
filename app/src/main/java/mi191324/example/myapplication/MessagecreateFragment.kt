@@ -1,4 +1,5 @@
 package mi191324.example.myapplication
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
@@ -14,8 +15,11 @@ import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.github.kittinunf.fuel.httpPost
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
 import java.io.IOException
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +40,8 @@ class MessagecreateFragment : Fragment() {
     private val PERMISSION_CODE = 21
     private var mediaRecorder: MediaRecorder? = null
     private var recordFile: String? = null
+    var storage = FirebaseStorage.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -104,9 +110,11 @@ class MessagecreateFragment : Fragment() {
     }
 
     private fun sendvoice() {
-        val url = "https://console.cloud.google.com/storage/browser/familyanswer"
-        recordFile = "filename.3gp"
+        val url = "https://console.cloud.google.com/storage/browser/familyanswer" /*ｓｅｒｖｅｒのurl*/
+        val recordFile = "filename.3gp"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
+        val storageRef = recordPath + "/" + recordFile
+        url.httpPost(listOf(recordFile to recordPath)).response{request, response, result ->  }
     }
 
     override fun onCreateView(
