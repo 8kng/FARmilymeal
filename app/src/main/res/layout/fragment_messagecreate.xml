@@ -17,11 +17,14 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="300dp"
-            android:text="送信するメッセージを録音します"
+            android:text="ボタンを押して録音開始"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.318" />
 
         <ToggleButton
             android:id="@+id/recordingBtn"
@@ -36,26 +39,55 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ToggleButton
             android:id="@+id/playerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="再生"
-            app:layout_constraintEnd_toStartOf="@+id/VoisesendBtn"
-            app:layout_constraintHorizontal_bias="0.154"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recordingBtn" />
-
-        <Button
-            android:id="@+id/VoisesendBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="送信"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/ic_play_arrow_24"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/playerBtn"
-            app:layout_constraintTop_toBottomOf="@+id/recordingBtn" />
+            app:layout_constraintHorizontal_bias="0.113"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.731" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="再生"
+            android:textSize="18sp"
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="511dp" />
+
+        <ToggleButton
+            android:id="@+id/VoisesendBtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/ic_send_24"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.874"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.731" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="送信"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="319dp"
+            tools:layout_editor_absoluteY="511dp" />
 
         <Chronometer
             android:id="@+id/Timer"
@@ -66,6 +98,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/messagecreateView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="録音"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="185dp"
+            tools:layout_editor_absoluteY="451dp"
+            tools:ignore="DuplicateIds,MissingConstraints" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
