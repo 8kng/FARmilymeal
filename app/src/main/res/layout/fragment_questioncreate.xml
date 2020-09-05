@@ -1,111 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".QuestioncreateFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="メッセージ編集画面"
+        android:textSize="15sp"
+        android:textColor="#4a4a4a"
+        android:layout_margin="15sp"/>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="80dp"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
+            <EditText
+                android:id="@+id/Question1editor"
+                android:layout_marginLeft="10dp"
+                android:text="Title 1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
 
-                <EditText
-                    android:id="@+id/Question1editor"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:ems="10"
-                    android:hint="@string/livedo_text"
-                    android:inputType="text"
-                    android:text="今日はいかがおすごしですか?" />
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="Person Name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/Question2editor"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:ems="10"
-                    android:hint="@string/livedo_text"
-                    android:inputType="text" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/Question3editor"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:ems="10"
-                    android:hint="@string/livedo_text"
-                    android:inputType="text" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/Question4editor"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:ems="10"
-                    android:hint="@string/livedo_text"
-                    android:inputType="text" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/Question5editor"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:ems="10"
-                    android:hint="@string/livedo_text"
-                    android:inputType="textPersonName" />
-
-                <Button
-                    android:id="@+id/SendQuestionsBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/ic_menu_send" />
-
-            </LinearLayout>
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="135dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_edit_24"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_send_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/Question2editor"
+                android:layout_marginLeft="10dp"
+                android:text="Title 2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                tools:ignore="DuplicateIds" />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="Person Name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="135dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_edit_24"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_send_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Question3editor"
+                android:layout_marginLeft="10dp"
+                android:text="Title 3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                tools:ignore="DuplicateIds" />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="Person Name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="135dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_edit_24"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_send_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/Question4editor"
+                android:layout_marginLeft="10dp"
+                android:text="Title 3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                tools:ignore="DuplicateIds" />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="Person Name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="135dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_edit_24"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_send_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/layout_border"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="7dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_play_circle_filled_24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/Question5editor"
+                android:layout_marginLeft="10dp"
+                android:text="Title 5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                tools:ignore="DuplicateIds" />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="10dp"
+                android:text="Person Name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="135dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_edit_24"/>
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_send_gray"/>
+    </LinearLayout>
+
+</LinearLayout>

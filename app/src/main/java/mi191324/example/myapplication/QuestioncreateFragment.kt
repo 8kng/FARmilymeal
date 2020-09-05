@@ -56,7 +56,7 @@ class QuestioncreateFragment : Fragment(){
         val Question3editor: EditText = View.findViewById(R.id.Question3editor)
         val Question4editor: EditText = View.findViewById(R.id.Question4editor)
         val Question5editor: EditText = View.findViewById(R.id.Question5editor)
-        val SendQuestionsBtn: Button = View.findViewById(R.id.SendQuestionsBtn)
+        //val SendQuestionsBtn: Button = View.findViewById(R.id.SendQuestionsBtn)
 
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val Question1 = pref.getString("Question1", "")
@@ -70,9 +70,9 @@ class QuestioncreateFragment : Fragment(){
         Question4editor.setText(Question4)
         Question5editor.setText(Question5)
 
-        SendQuestionsBtn.setOnClickListener(){
-            saveDate()
-        }
+        //SendQuestionsBtn.setOnClickListener(){
+        //    saveDate()
+        //}
         return View
     }
 
