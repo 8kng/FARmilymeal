@@ -1,10 +1,15 @@
 package mi191324.example.myapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +32,24 @@ class NotificationFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/helloworld"
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val httpAsync = (baseUrl + "?message=Konnichiha")
+            .httpGet()
+            .responseString { request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result) {
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        println(ex)
+                    }
+                    is Result.Success -> {
+                        val data = result.get()
+                        println(data)
+                    }
+                }
+            }
+        httpAsync.join()
     }
 
     override fun onCreateView(

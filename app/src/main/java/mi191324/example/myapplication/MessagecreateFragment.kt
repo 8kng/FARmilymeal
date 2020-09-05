@@ -15,8 +15,8 @@ import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.github.kittinunf.fuel.httpPost
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
 import java.io.IOException
 
@@ -41,6 +41,8 @@ class MessagecreateFragment : Fragment() {
     private var mediaRecorder: MediaRecorder? = null
     private var recordFile: String? = null
     var storage = FirebaseStorage.getInstance()
+    private var task: UploadTask? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,12 +112,13 @@ class MessagecreateFragment : Fragment() {
     }
 
     private fun sendvoice() {
-        val url = "https://console.cloud.google.com/storage/browser/familyanswer" /*ｓｅｒｖｅｒのurl*/
+        val urlSt = "https://console.cloud.google.com/storage/browser/familyanswer" /*ｓｅｒｖｅｒのurl*/
         val recordFile = "filename.3gp"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         val storageRef = recordPath + "/" + recordFile
-        url.httpPost(listOf(recordFile to recordPath)).response{request, response, result ->  }
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
