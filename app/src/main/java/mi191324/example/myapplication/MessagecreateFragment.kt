@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,16 @@ import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FileDataPart
+import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.result.Result
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
+import java.io.File
 import java.io.IOException
 
 
@@ -112,10 +120,32 @@ class MessagecreateFragment : Fragment() {
     }
 
     private fun sendvoice() {
-        val urlSt = "https://console.cloud.google.com/storage/browser/familyanswer" /*ｓｅｒｖｅｒのurl*/
         val recordFile = "filename.3gp"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         val storageRef = recordPath + "/" + recordFile
+
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/voicefile "
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val httpAsync = (baseUrl + "?message=Konnichiha")
+            .httpPost(listOf("bbb" to "ccc"))
+            .responseString { request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result) {
+                    is Result.Success -> {
+                        Fuel.upload(storageRef)
+                            .add(
+                                FileDataPart(File(recordFile))
+                            )
+                        val data = result.get()
+                        println(data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        println(ex)
+                    }
+                }
+            }
+        httpAsync.join()
     }
 
 
