@@ -16,59 +16,50 @@
         android:layout_margin="15sp"/>
 
     <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/layout_border"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_play_circle_filled_24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/Question1editor"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Title 1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="10dp"
-                android:text="Person Name"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:inputType="text"/>
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_marginLeft="135dp"
+        <ToggleButton
+            android:id="@+id/textallowBtn1"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/ic_baseline_edit_24" />
 
-        <ImageView
+        <Button
+            android:id="@+id/messagesendBtn1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_send_gray"/>
+            android:background="@drawable/ic_send_gray" />
 
     </LinearLayout>
 
@@ -81,12 +72,6 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="7dp">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_play_circle_filled_24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
 
         <LinearLayout
             android:layout_gravity="center"
@@ -96,37 +81,34 @@
 
             <EditText
                 android:id="@+id/Question2editor"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Title 2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="10dp"
-                android:text="Person Name"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold"
+                tools:ignore="DuplicateIds"
+                android:inputType="text"/>
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_marginLeft="135dp"
+        <ToggleButton
+            android:id="@+id/textallowBtn2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/ic_baseline_edit_24" />
 
-        <ImageView
+        <Button
+            android:id="@+id/messagesendBtn2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_send_gray"/>
+            android:background="@drawable/ic_send_gray" />
 
     </LinearLayout>
 
@@ -139,12 +121,6 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="7dp">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_play_circle_filled_24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
 
         <LinearLayout
             android:layout_gravity="center"
@@ -154,37 +130,34 @@
 
             <EditText
                 android:id="@+id/Question3editor"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Title 3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="10dp"
-                android:text="Person Name"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold"
+                tools:ignore="DuplicateIds"
+                android:inputType="text"/>
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_marginLeft="135dp"
+        <ToggleButton
+            android:id="@+id/textallowBtn3"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/ic_baseline_edit_24" />
 
-        <ImageView
+        <Button
+            android:id="@+id/messagesendBtn3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_send_gray"/>
+            android:background="@drawable/ic_send_gray" />
 
     </LinearLayout>
 
@@ -197,12 +170,6 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="7dp">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_play_circle_filled_24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
 
         <LinearLayout
             android:layout_gravity="center"
@@ -212,37 +179,34 @@
 
             <EditText
                 android:id="@+id/Question4editor"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Title 3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="10dp"
-                android:text="Person Name"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold"
+                tools:ignore="DuplicateIds"
+                android:inputType="text"/>
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_marginLeft="135dp"
+        <ToggleButton
+            android:id="@+id/textallowBtn4"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/ic_baseline_edit_24" />
 
-        <ImageView
+        <Button
+            android:id="@+id/messagesendBtn4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_send_gray"/>
+            android:background="@drawable/ic_send_gray" />
 
     </LinearLayout>
 
@@ -256,12 +220,6 @@
         android:layout_marginRight="7dp"
         android:layout_marginBottom="7dp">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_play_circle_filled_24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-
         <LinearLayout
             android:layout_gravity="center"
             android:orientation="vertical"
@@ -270,37 +228,34 @@
 
             <EditText
                 android:id="@+id/Question5editor"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:text="Title 5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="10dp"
-                android:text="Person Name"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold"
+                tools:ignore="DuplicateIds"
+                android:inputType="text"/>
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_marginLeft="135dp"
+        <ToggleButton
+            android:id="@+id/textallowBtn5"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_edit_24"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textOff=""
+            android:textOn=""
+            android:background="@drawable/ic_baseline_edit_24" />
 
-        <ImageView
+        <Button
+            android:id="@+id/messagesendBtn5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_send_gray"/>
+            android:background="@drawable/ic_send_gray" />
     </LinearLayout>
 
 </LinearLayout>

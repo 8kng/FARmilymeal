@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_questioncreate.*
 
@@ -44,6 +45,42 @@ class QuestioncreateFragment : Fragment(){
             .apply()
     }
 
+    private fun allow1method(){
+        if (textallowBtn1.isChecked == false){
+            Question1editor.setEnabled(false)
+        } else{
+            Question1editor.setEnabled(true)
+        }
+    }
+    private fun allow2method(){
+        if (textallowBtn2.isChecked == false){
+            Question2editor.setEnabled(false)
+        } else{
+            Question2editor.setEnabled(true)
+        }
+    }
+    private fun allow3method(){
+        if (textallowBtn3.isChecked == false){
+            Question3editor.setEnabled(false)
+        } else{
+            Question3editor.setEnabled(true)
+        }
+    }
+    private fun allow4method(){
+        if (textallowBtn4.isChecked == false){
+            Question4editor.setEnabled(false)
+        } else{
+            Question4editor.setEnabled(true)
+        }
+    }
+    private fun allow5method(){
+        if (textallowBtn5.isChecked == false){
+            Question5editor.setEnabled(false)
+        } else{
+            Question5editor.setEnabled(true)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +93,47 @@ class QuestioncreateFragment : Fragment(){
         val Question3editor: EditText = View.findViewById(R.id.Question3editor)
         val Question4editor: EditText = View.findViewById(R.id.Question4editor)
         val Question5editor: EditText = View.findViewById(R.id.Question5editor)
+        val allow1: ToggleButton = View.findViewById(R.id.textallowBtn1)
+        val allow2: ToggleButton = View.findViewById(R.id.textallowBtn2)
+        val allow3: ToggleButton = View.findViewById(R.id.textallowBtn3)
+        val allow4: ToggleButton = View.findViewById(R.id.textallowBtn4)
+        val allow5: ToggleButton = View.findViewById(R.id.textallowBtn5)
+        val send1: Button = View.findViewById(R.id.messagesendBtn1)
+        val send2: Button = View.findViewById(R.id.messagesendBtn2)
+        val send3: Button = View.findViewById(R.id.messagesendBtn3)
+        val send4: Button = View.findViewById(R.id.messagesendBtn4)
+        val send5: Button = View.findViewById(R.id.messagesendBtn5)
+
+        if (allow1.isChecked == false){
+            Question1editor.setEnabled(false)
+        }
+        if (allow2.isChecked == false){
+            Question2editor.setEnabled(false)
+        }
+        if (allow3.isChecked == false){
+            Question3editor.setEnabled(false)
+        }
+        if (allow4.isChecked == false){
+            Question4editor.setEnabled(false)
+        }
+        if (allow5.isChecked == false){
+            Question5editor.setEnabled(false)
+        }
+        allow1.setOnClickListener(){
+            allow1method()
+        }
+        allow2.setOnClickListener(){
+            allow2method()
+        }
+        allow3.setOnClickListener(){
+            allow3method()
+        }
+        allow4.setOnClickListener(){
+            allow4method()
+        }
+        allow5.setOnClickListener(){
+            allow5method()
+        }
         //val SendQuestionsBtn: Button = View.findViewById(R.id.SendQuestionsBtn)
 
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
