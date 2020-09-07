@@ -16,8 +16,6 @@ import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.FileDataPart
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import com.google.firebase.storage.FirebaseStorage
@@ -25,7 +23,6 @@ import com.google.firebase.storage.UploadTask
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
-import java.io.File
 import java.io.IOException
 
 
@@ -124,18 +121,14 @@ class MessagecreateFragment : Fragment() {
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         val storageRef = recordPath + "/" + recordFile
 
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/voicefile "
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyvoice"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        val httpAsync = (baseUrl + "?message=Konnichiha")
-            .httpPost(listOf("bbb" to "ccc"))
+        val httpAsync = (baseUrl + storageRef)
+            .httpPost()
             .responseString { request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result) {
                     is Result.Success -> {
-                        Fuel.upload(storageRef)
-                            .add(
-                                FileDataPart(File(recordFile))
-                            )
                         val data = result.get()
                         println(data)
                     }
