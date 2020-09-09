@@ -16,13 +16,15 @@ import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.fuel.core.FileDataPart
+import com.github.kittinunf.fuel.httpUpload
 import com.github.kittinunf.result.Result
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_messagecreate.*
+import java.io.File
 import java.io.IOException
 
 
@@ -58,15 +60,27 @@ class MessagecreateFragment : Fragment() {
     }
     private fun startPlay(){
         messagecreateView.setText("再生します")
-        recordFile = "filename.3gp"
+        recordFile = "filename.ogg"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
-        try {
-            mp = MediaPlayer()
-            mp.setDataSource(recordPath + "/" + recordFile)
-            mp.prepare()
-            mp.start()
-        } catch (e: IOException) {
-            e.printStackTrace()
+        if (playerBtn.isChecked == true) {
+            try {
+                mp = MediaPlayer()
+                mp.setDataSource(recordPath + "/" + recordFile)
+                mp.prepare()
+                mp.start()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }else {
+            try {
+                mp.stop()
+                mp.prepare()
+                mp.release()
+            }catch (e: IllegalStateException){
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
     private fun choose(){
@@ -88,7 +102,7 @@ class MessagecreateFragment : Fragment() {
                 Timer.setBase(SystemClock.elapsedRealtime())
                 Timer.start()
                 messagecreateView.setText("メッセージを録音しています")
-                recordFile = "filename.3gp"
+                recordFile = "filename.ogg"
                 val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
                 mediaRecorder = MediaRecorder()
                 mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -117,14 +131,15 @@ class MessagecreateFragment : Fragment() {
     }
 
     private fun sendvoice() {
-        val recordFile = "filename.3gp"
+        val recordFile = "filename.ogg"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         val storageRef = recordPath + "/" + recordFile
 
         val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyvoice"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        val httpAsync = (baseUrl + storageRef)
-            .httpPost()
+        val httpAsync = (baseUrl)
+            .httpUpload()
+            .add(FileDataPart(File(recordPath + "/" + recordFile), name = "file"))
             .responseString { request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result) {

@@ -14,8 +14,8 @@
             android:id="@+id/messagecreateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="300dp"
             android:text="ボタンを押して録音開始"
             android:textSize="24sp"
@@ -44,7 +44,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/ic_play_arrow_24"
+            android:background="@drawable/playstoplayout"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,11 +58,13 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="1dp"
             android:text="再生"
             android:textSize="18sp"
-            tools:ignore="DuplicateIds,MissingConstraints"
-            tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="511dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerBtn"
+            tools:ignore="DuplicateIds,MissingConstraints" />
 
         <ToggleButton
             android:id="@+id/VoisesendBtn"
@@ -83,11 +85,13 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="52dp"
             android:text="送信"
             android:textSize="18sp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="319dp"
-            tools:layout_editor_absoluteY="511dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/VoisesendBtn"
+            tools:ignore="MissingConstraints" />
 
         <Chronometer
             android:id="@+id/Timer"
@@ -103,10 +107,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="85dp"
             android:text="録音"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="185dp"
-            tools:layout_editor_absoluteY="451dp"
+            app:layout_constraintEnd_toStartOf="@+id/VoisesendBtn"
+            app:layout_constraintStart_toEndOf="@+id/playerBtn"
+            app:layout_constraintTop_toBottomOf="@+id/recordingBtn"
             tools:ignore="DuplicateIds,MissingConstraints" />
 
 
