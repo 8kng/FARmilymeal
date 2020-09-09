@@ -109,7 +109,6 @@ class MessagecreateFragment : Fragment() {
                 mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                 mediaRecorder!!.setOutputFile(recordPath + "/" + recordFile);
                 mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
                 try {
                     mediaRecorder!!.prepare()
                 } catch (e: IOException) {
@@ -139,7 +138,7 @@ class MessagecreateFragment : Fragment() {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = (baseUrl)
             .httpUpload()
-            .add(FileDataPart(File(recordPath + "/" + recordFile), name = "file"))
+            .add(FileDataPart(File(recordPath + "/" + recordFile), contentType  = "audio/3gpp2",  name = "file"))
             .responseString { request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result) {
