@@ -1,5 +1,6 @@
 package mi191324.example.myapplication
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
@@ -7,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_questioncreate.*
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,17 +39,141 @@ class QuestioncreateFragment : Fragment(){
         }
     }
 
-    private fun saveDate(){
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val View = inflater.inflate(R.layout.fragment_questioncreate, container, false)
+
+        val Question1editor: EditText = View.findViewById(R.id.Question1editor)
+        val Question2editor: EditText = View.findViewById(R.id.Question2editor)
+        val Question3editor: EditText = View.findViewById(R.id.Question3editor)
+        val Question4editor: EditText = View.findViewById(R.id.Question4editor)
+        val Question5editor: EditText = View.findViewById(R.id.Question5editor)
+        val allow1: ToggleButton = View.findViewById(R.id.textallowBtn1)
+        val allow2: ToggleButton = View.findViewById(R.id.textallowBtn2)
+        val allow3: ToggleButton = View.findViewById(R.id.textallowBtn3)
+        val allow4: ToggleButton = View.findViewById(R.id.textallowBtn4)
+        val allow5: ToggleButton = View.findViewById(R.id.textallowBtn5)
+        val send1: Button = View.findViewById(R.id.messagesendBtn1)
+        val send2: Button = View.findViewById(R.id.messagesendBtn2)
+        val send3: Button = View.findViewById(R.id.messagesendBtn3)
+        val send4: Button = View.findViewById(R.id.messagesendBtn4)
+        val send5: Button = View.findViewById(R.id.messagesendBtn5)
+        val messagesendBtn1: Button = View.findViewById(R.id.messagesendBtn1)
+        val messagesendBtn2: Button = View.findViewById(R.id.messagesendBtn2)
+        val messagesendBtn3: Button = View.findViewById(R.id.messagesendBtn3)
+        val messagesendBtn4: Button = View.findViewById(R.id.messagesendBtn4)
+        val messagesendBtn5: Button = View.findViewById(R.id.messagesendBtn5)
+
+        if (allow1.isChecked == false){
+            Question1editor.setEnabled(false)
+        }
+        if (allow2.isChecked == false){
+            Question2editor.setEnabled(false)
+        }
+        if (allow3.isChecked == false){
+            Question3editor.setEnabled(false)
+        }
+        if (allow4.isChecked == false){
+            Question4editor.setEnabled(false)
+        }
+        if (allow5.isChecked == false){
+            Question5editor.setEnabled(false)
+        }
+        allow1.setOnClickListener(){
+            allow1method()
+        }
+        allow2.setOnClickListener(){
+            allow2method()
+        }
+        allow3.setOnClickListener(){
+            allow3method()
+        }
+        allow4.setOnClickListener(){
+            allow4method()
+        }
+        allow5.setOnClickListener(){
+            allow5method()
+        }
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val Question1 = pref.getString("Question1", "")
+        val Question2 = pref.getString("Question2", "")
+        val Question3 = pref.getString("Question3", "")
+        val Question4 = pref.getString("Question4", "")
+        val Question5 = pref.getString("Question5", "")
+        Question1editor.setText(Question1)
+        Question2editor.setText(Question2)
+        Question3editor.setText(Question3)
+        Question4editor.setText(Question4)
+        Question5editor.setText(Question5)
+
+        messagesendBtn1.setOnClickListener(){
+            saveDate1()
+        }
+        messagesendBtn2.setOnClickListener(){
+            saveDate2()
+        }
+        messagesendBtn3.setOnClickListener(){
+            saveDate3()
+        }
+        messagesendBtn4.setOnClickListener(){
+            saveDate4()
+        }
+        messagesendBtn5.setOnClickListener(){
+            saveDate5()
+        }
+        return View
+    }
+    private fun saveDate1(){
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question1", Question1editor.text.toString())
-            .putString("Question2", Question2editor.text.toString())
-            .putString("Question3", Question3editor.text.toString())
-            .putString("Question4", Question4editor.text.toString())
-            .putString("Question5", Question5editor.text.toString())
             .apply()
+        try {
+            val fileout: FileOutputStream = requireActivity().openFileOutput("Question1.txt", MODE_PRIVATE)
+            val outputWriter = OutputStreamWriter(fileout)
+            outputWriter.write(Question1editor.getText().toString())
+            outputWriter.close()
+            val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+            myToast.show()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
-
+    private fun saveDate2(){
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = pref.edit()
+        editor.putString("Question2", Question2editor.text.toString())
+            .apply()
+        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+        myToast.show()
+    }
+    private fun saveDate3(){
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = pref.edit()
+        editor.putString("Question3", Question3editor.text.toString())
+            .apply()
+        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+        myToast.show()
+    }
+    private fun saveDate4(){
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = pref.edit()
+        editor.putString("Question4", Question1editor.text.toString())
+            .apply()
+        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+        myToast.show()
+    }
+    private fun saveDate5(){
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = pref.edit()
+        editor.putString("Question5", Question1editor.text.toString())
+            .apply()
+        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+        myToast.show()
+    }
     private fun allow1method(){
         if (textallowBtn1.isChecked == false){
             Question1editor.setEnabled(false)
@@ -79,79 +208,6 @@ class QuestioncreateFragment : Fragment(){
         } else{
             Question5editor.setEnabled(true)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val View = inflater.inflate(R.layout.fragment_questioncreate, container, false)
-
-        val Question1editor: EditText = View.findViewById(R.id.Question1editor)
-        val Question2editor: EditText = View.findViewById(R.id.Question2editor)
-        val Question3editor: EditText = View.findViewById(R.id.Question3editor)
-        val Question4editor: EditText = View.findViewById(R.id.Question4editor)
-        val Question5editor: EditText = View.findViewById(R.id.Question5editor)
-        val allow1: ToggleButton = View.findViewById(R.id.textallowBtn1)
-        val allow2: ToggleButton = View.findViewById(R.id.textallowBtn2)
-        val allow3: ToggleButton = View.findViewById(R.id.textallowBtn3)
-        val allow4: ToggleButton = View.findViewById(R.id.textallowBtn4)
-        val allow5: ToggleButton = View.findViewById(R.id.textallowBtn5)
-        val send1: Button = View.findViewById(R.id.messagesendBtn1)
-        val send2: Button = View.findViewById(R.id.messagesendBtn2)
-        val send3: Button = View.findViewById(R.id.messagesendBtn3)
-        val send4: Button = View.findViewById(R.id.messagesendBtn4)
-        val send5: Button = View.findViewById(R.id.messagesendBtn5)
-
-        if (allow1.isChecked == false){
-            Question1editor.setEnabled(false)
-        }
-        if (allow2.isChecked == false){
-            Question2editor.setEnabled(false)
-        }
-        if (allow3.isChecked == false){
-            Question3editor.setEnabled(false)
-        }
-        if (allow4.isChecked == false){
-            Question4editor.setEnabled(false)
-        }
-        if (allow5.isChecked == false){
-            Question5editor.setEnabled(false)
-        }
-        allow1.setOnClickListener(){
-            allow1method()
-        }
-        allow2.setOnClickListener(){
-            allow2method()
-        }
-        allow3.setOnClickListener(){
-            allow3method()
-        }
-        allow4.setOnClickListener(){
-            allow4method()
-        }
-        allow5.setOnClickListener(){
-            allow5method()
-        }
-        //val SendQuestionsBtn: Button = View.findViewById(R.id.SendQuestionsBtn)
-
-        val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        val Question1 = pref.getString("Question1", "")
-        val Question2 = pref.getString("Question2", "")
-        val Question3 = pref.getString("Question3", "")
-        val Question4 = pref.getString("Question4", "")
-        val Question5 = pref.getString("Question5", "")
-        Question1editor.setText(Question1)
-        Question2editor.setText(Question2)
-        Question3editor.setText(Question3)
-        Question4editor.setText(Question4)
-        Question5editor.setText(Question5)
-
-        //SendQuestionsBtn.setOnClickListener(){
-        //    saveDate()
-        //}
-        return View
     }
 
     companion object {
