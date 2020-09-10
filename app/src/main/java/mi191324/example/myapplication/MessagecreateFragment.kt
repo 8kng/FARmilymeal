@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Chronometer
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -138,7 +139,13 @@ class MessagecreateFragment : Fragment() {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = (baseUrl)
             .httpUpload()
-            .add(FileDataPart(File(recordPath + "/" + recordFile), contentType  = "audio/3gpp2",  name = "file"))
+            .add(
+                FileDataPart(
+                    File(recordPath + "/" + recordFile),
+                    contentType = "audio/3gpp2",
+                    name = "file"
+                )
+            )
             .responseString { request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result) {
@@ -153,6 +160,12 @@ class MessagecreateFragment : Fragment() {
                 }
             }
         httpAsync.join()
+        openDialog()
+    }
+
+    public fun openDialog(){
+        val myToast: Toast = Toast.makeText(getActivity(), "送信しました", Toast.LENGTH_LONG)
+        myToast.show()
     }
 
 
