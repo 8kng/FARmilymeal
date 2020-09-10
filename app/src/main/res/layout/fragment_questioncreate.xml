@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="メッセージ編集画面"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textColor="#4a4a4a"
         android:layout_margin="15sp"/>
 
