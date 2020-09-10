@@ -3,6 +3,7 @@ package mi191324.example.myapplication
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,11 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
+import com.github.kittinunf.fuel.core.FileDataPart
+import com.github.kittinunf.fuel.httpUpload
+import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.fragment_questioncreate.*
+import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
 
@@ -136,11 +141,34 @@ class QuestioncreateFragment : Fragment(){
             val outputWriter = OutputStreamWriter(fileout)
             outputWriter.write(Question1editor.getText().toString())
             outputWriter.close()
-            val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-            myToast.show()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
+        val httpAsync = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestions"
+            .httpUpload()
+            .add(
+                FileDataPart(
+                    File("Question1.txt"),
+                    contentType = "text/txt",
+                    name = "file"
+                )
+            )
+            .responseString { request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result) {
+                    is Result.Success -> {
+                        val data = result.get()
+                        println(data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        println(ex)
+                    }
+                }
+            }
+        httpAsync.join()
+        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+        myToast.show()
     }
     private fun saveDate2(){
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
