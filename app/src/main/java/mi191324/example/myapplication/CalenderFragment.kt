@@ -58,7 +58,11 @@ class CalenderFragment<Boolen> : Fragment() {
         val SecondView: ImageView = View.findViewById(R.id.SecondView)
         val ThirdView: ImageView = View.findViewById(R.id.ThirdView)
         val text: TextView = View.findViewById(R.id.FirstText)
-        
+
+        calenderView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            val date = "$year/$month/$dayOfMonth"
+            text.setText(date)
+        }
         return View
     }
 
