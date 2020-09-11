@@ -1,9 +1,7 @@
 package mi191324.example.myapplication
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +10,10 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
-import com.github.kittinunf.fuel.core.FileDataPart
-import com.github.kittinunf.fuel.httpUpload
-import com.github.kittinunf.result.Result
+import com.github.kittinunf.fuel.Fuel
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_questioncreate.*
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +38,10 @@ class QuestioncreateFragment : Fragment(){
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+    data class QuestionRequest (
+        val file: String
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -136,40 +135,16 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question1", Question1editor.text.toString())
             .apply()
-        try {
-            val fileout: FileOutputStream = requireActivity().openFileOutput("Question1.txt", MODE_PRIVATE)
-            val outputWriter = OutputStreamWriter(fileout)
-            outputWriter.write(Question1editor.getText().toString())
-            outputWriter.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        val httpAsync = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestions"
-            .httpUpload()
-            .add(
-                FileDataPart(
-                    File("Question1.txt"),
-                    contentType = "text/txt",
-                    name = "file"
-                )
-            )
-            .responseString { request, response, result ->
-                Log.d("hoge", result.toString())
-                when (result) {
-                    is Result.Success -> {
-                        val data = result.get()
-                        println(data)
-                    }
-                    is Result.Failure -> {
-                        val ex = result.getException()
-                        println(ex)
-                    }
-                }
-            }
-        httpAsync.join()
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val requestAdapter = moshi.adapter(QuestionRequest::class.java)
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val Question1 = QuestionRequest(file = Question1editor.getText().toString())
+        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion").header(header).body(requestAdapter.toJson(Question1)).responseString()
+        val (date, _) = result
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
+
     private fun saveDate2(){
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()

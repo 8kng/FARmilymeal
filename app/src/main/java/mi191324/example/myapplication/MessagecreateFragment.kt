@@ -140,11 +140,11 @@ class MessagecreateFragment : Fragment() {
         val httpAsync = (baseUrl)
             .httpUpload()
             .add(
-                FileDataPart(
-                    File(recordPath + "/" + recordFile),
-                    contentType = "audio/3gpp2",
-                    name = "file"
-                )
+                    FileDataPart(
+                        File(recordPath + "/" + recordFile),
+                        contentType = "audio/3gpp2",
+                        name = "file"
+                    )
             )
             .responseString { request, response, result ->
                 Log.d("hoge", result.toString())
