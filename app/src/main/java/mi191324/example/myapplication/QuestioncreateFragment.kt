@@ -139,7 +139,7 @@ class QuestioncreateFragment : Fragment(){
         /*サーバーにテキストを送信する*/
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
-        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "text/Json")
         val Question1 = QuestionRequest(file = Question1editor.getText().toString())
         val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion").header(header).body(requestAdapter.toJson(Question1)).responseString()
         val (date, _) = result
@@ -155,7 +155,7 @@ class QuestioncreateFragment : Fragment(){
             .apply()
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
-        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "text/Json")
         val Question2 = QuestionRequest(file = Question2editor.getText().toString())
         val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion2").header(header).body(requestAdapter.toJson(Question2)).responseString()
         val (date, _) = result
