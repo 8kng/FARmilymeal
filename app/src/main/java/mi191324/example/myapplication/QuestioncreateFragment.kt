@@ -131,16 +131,19 @@ class QuestioncreateFragment : Fragment(){
         return View
     }
     private fun saveDate1(){
+        /*設定したメッセージを固定表示する*/
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question1", Question1editor.text.toString())
             .apply()
+        /*サーバーにテキストを送信する*/
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
         val Question1 = QuestionRequest(file = Question1editor.getText().toString())
         val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion").header(header).body(requestAdapter.toJson(Question1)).responseString()
         val (date, _) = result
+        /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
@@ -150,6 +153,13 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question2", Question2editor.text.toString())
             .apply()
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val requestAdapter = moshi.adapter(QuestionRequest::class.java)
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val Question2 = QuestionRequest(file = Question2editor.getText().toString())
+        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion2").header(header).body(requestAdapter.toJson(Question2)).responseString()
+        val (date, _) = result
+        /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
@@ -158,6 +168,13 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question3", Question3editor.text.toString())
             .apply()
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val requestAdapter = moshi.adapter(QuestionRequest::class.java)
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val Question3 = QuestionRequest(file = Question3editor.getText().toString())
+        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion3").header(header).body(requestAdapter.toJson(Question3)).responseString()
+        val (date, _) = result
+        /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
@@ -166,6 +183,13 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question4", Question1editor.text.toString())
             .apply()
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val requestAdapter = moshi.adapter(QuestionRequest::class.java)
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val Question4 = QuestionRequest(file = Question4editor.getText().toString())
+        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion4").header(header).body(requestAdapter.toJson(Question4)).responseString()
+        val (date, _) = result
+        /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
@@ -174,6 +198,13 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question5", Question1editor.text.toString())
             .apply()
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val requestAdapter = moshi.adapter(QuestionRequest::class.java)
+        val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
+        val Question5 = QuestionRequest(file = Question5editor.getText().toString())
+        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion5").header(header).body(requestAdapter.toJson(Question5)).responseString()
+        val (date, _) = result
+        /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
