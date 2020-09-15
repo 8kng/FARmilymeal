@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
-import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.Moshi
@@ -173,17 +172,34 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question2", Question2editor.text.toString())
             .apply()
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion2"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
         val Question2 = QuestionRequest(context = Question2editor.getText().toString())
-        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion2").header(header).body(requestAdapter.toJson(Question2)).responseString()
-        val (date, _) = result
+        val httpAsync = (baseUrl)
+            .httpPost()
+            .header(header).body(requestAdapter.toJson(Question2))
+            .responseString{request, response, result ->
+                Log.d("hoge", result.toString())
+                when(result){
+                    is com.github.kittinunf.result.Result.Success -> {
+                        val data = result.get()
+                        Log.d("responce", data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        Log.d("response", ex.toString())
+                    }
+                }
+            }
+        httpAsync.join()
         /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
     private fun saveDate3(){
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion3"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question3", Question3editor.text.toString())
@@ -192,13 +208,29 @@ class QuestioncreateFragment : Fragment(){
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
         val Question3 = QuestionRequest(context = Question3editor.getText().toString())
-        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion3").header(header).body(requestAdapter.toJson(Question3)).responseString()
-        val (date, _) = result
+        val httpAsync = (baseUrl)
+            .httpPost()
+            .header(header).body(requestAdapter.toJson(Question3))
+            .responseString{request, response, result ->
+                Log.d("hoge", result.toString())
+                when(result){
+                    is com.github.kittinunf.result.Result.Success -> {
+                        val data = result.get()
+                        Log.d("responce", data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        Log.d("response", ex.toString())
+                    }
+                }
+            }
+        httpAsync.join()
         /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
     private fun saveDate4(){
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion4"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question4", Question1editor.text.toString())
@@ -207,13 +239,29 @@ class QuestioncreateFragment : Fragment(){
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
         val Question4 = QuestionRequest(context = Question4editor.getText().toString())
-        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion4").header(header).body(requestAdapter.toJson(Question4)).responseString()
-        val (date, _) = result
+        val httpAsync = (baseUrl)
+            .httpPost()
+            .header(header).body(requestAdapter.toJson(Question4))
+            .responseString{request, response, result ->
+                Log.d("hoge", result.toString())
+                when(result){
+                    is com.github.kittinunf.result.Result.Success -> {
+                        val data = result.get()
+                        Log.d("responce", data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        Log.d("response", ex.toString())
+                    }
+                }
+            }
+        httpAsync.join()
         /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
     }
     private fun saveDate5(){
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion5"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question5", Question1editor.text.toString())
@@ -222,8 +270,23 @@ class QuestioncreateFragment : Fragment(){
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
         val Question5 = QuestionRequest(context = Question5editor.getText().toString())
-        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion5").header(header).body(requestAdapter.toJson(Question5)).responseString()
-        val (date, _) = result
+        val httpAsync = (baseUrl)
+            .httpPost()
+            .header(header).body(requestAdapter.toJson(Question5))
+            .responseString{request, response, result ->
+                Log.d("hoge", result.toString())
+                when(result){
+                    is com.github.kittinunf.result.Result.Success -> {
+                        val data = result.get()
+                        Log.d("responce", data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        Log.d("response", ex.toString())
+                    }
+                }
+            }
+        httpAsync.join()
         /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
