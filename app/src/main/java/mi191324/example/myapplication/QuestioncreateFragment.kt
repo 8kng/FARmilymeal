@@ -2,6 +2,7 @@ package mi191324.example.myapplication
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.result.Result
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_questioncreate.*
@@ -130,14 +133,31 @@ class QuestioncreateFragment : Fragment(){
         }
         return View
     }
+
     private fun saveDate1(){
         /*サーバーにテキストを送信する*/
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/json")
         val Question1 = QuestionRequest(context = Question1editor.getText().toString())
-        val (_, _, result) = Fuel.post("https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion").header(header).body(requestAdapter.toJson(Question1)).responseString()
-        val (date, _) = result
+        val httpAsync = (baseUrl)
+            .httpPost()
+            .header(header).body(requestAdapter.toJson(Question1))
+            .responseString{request, response, result ->
+                Log.d("hoge", result.toString())
+                when(result){
+                    is com.github.kittinunf.result.Result.Success -> {
+                        val data = result.get()
+                        Log.d("responce", data)
+                    }
+                    is Result.Failure -> {
+                        val ex = result.getException()
+                        Log.d("response", ex.toString())
+                    }
+                }
+            }
+        httpAsync.join()
         /*送信完了したことを伝える*/
         val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
         myToast.show()
