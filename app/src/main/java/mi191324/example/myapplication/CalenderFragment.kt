@@ -44,15 +44,8 @@ class CalenderFragment<Boolen> : Fragment() {
         return super.onOptionsItemSelected(item!!)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val View = inflater.inflate(
-            R.layout.fragment_calender,
-            container,
-            false
-        )
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val View = inflater.inflate(R.layout.fragment_calender, container, false)
         val calenderView: CalendarView =  View.findViewById(R.id.calendarView)
         val FirstView: ImageView = View.findViewById(R.id.FirstView)
         val SecondView: ImageView = View.findViewById(R.id.SecondView)
