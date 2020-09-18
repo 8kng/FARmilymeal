@@ -1,5 +1,6 @@
 package mi191324.example.myapplication
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.fragment_calender.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +43,7 @@ class CalenderFragment<Boolen> : Fragment() {
         }
     }
 
-    data class DayRequest (
+    data class DayRequest(
         val date: String
     )
 
@@ -88,45 +90,40 @@ class CalenderFragment<Boolen> : Fragment() {
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_1)) /*今日の朝ご飯の画像を取得*/
-            .responseString{request, response, result ->
-                Log.d("hoge", result.toString())
+            .response(){ request, response, result ->
                 when(result){
-                    is com.github.kittinunf.result.Result.Success -> {
-                        val data = result.get()
-                        Log.d("responce", data)
+                    is Result.Success -> {
+                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                        FirstView.setImageBitmap(bitmaper)
                     }
                     is Result.Failure -> {
-                        val ex = result.getException()
-                        Log.d("response", ex.toString())
+                        Log.d("miss", "miss")
                     }
                 }
             }
             .header(header).body(requestAdapter.toJson(Daydate_2)) /*今日の昼ごはんの画像習得*/
-            .responseString{request, response, result ->
+            .response{ request, response, result ->
                 Log.d("hoge", result.toString())
                 when(result){
-                    is com.github.kittinunf.result.Result.Success -> {
-                        val data = result.get()
-                        Log.d("responce", data)
+                    is Result.Success -> {
+                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                        FirstView.setImageBitmap(bitmaper)
                     }
                     is Result.Failure -> {
-                        val ex = result.getException()
-                        Log.d("response", ex.toString())
+                        Log.d("miss", "miss")
                     }
                 }
             }
             .header(header).body(requestAdapter.toJson(Daydate_3)) /*今日の晩御飯の画像を習得*/
-            .responseString{request, response, result ->
+            .response{ request, response, result ->
                 Log.d("hoge", result.toString())
                 when(result){
-                    is com.github.kittinunf.result.Result.Success -> {
-                        val data = result.get()
-                        Log.d("responce", data)
-                        text_2.setText(data)
+                    is Result.Success -> {
+                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                        FirstView.setImageBitmap(bitmaper)
                     }
                     is Result.Failure -> {
-                        val ex = result.getException()
-                        Log.d("response", ex.toString())
+                        Log.d("miss", "miss")
                     }
                 }
             }
@@ -145,45 +142,41 @@ class CalenderFragment<Boolen> : Fragment() {
             val httpAsync = (baseUrl)
                 .httpPost()
                 .header(header).body(requestAdapter.toJson(sendday_1)) /*選択日の朝ご飯の画像を習得*/
-                .responseString { request, response, result ->
+                .response { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
-                        is com.github.kittinunf.result.Result.Success -> {
-                            val data = result.get()
-                            Log.d("responce", data)
+                        is Result.Success -> {
+                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                            FirstView.setImageBitmap(bitmaper)
                         }
                         is Result.Failure -> {
-                            val ex = result.getException()
-                            Log.d("response", ex.toString())
+                            Log.d("miss", "miss")
                         }
                     }
                 }
                 .header(header).body(requestAdapter.toJson(sendday_2)) /*選択日の昼飯の画像を習得*/
-                .responseString { request, response, result ->
+                .response { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
-                        is com.github.kittinunf.result.Result.Success -> {
-                            val data = result.get()
-                            Log.d("responce", data)
+                        is Result.Success -> {
+                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                            FirstView.setImageBitmap(bitmaper)
                         }
                         is Result.Failure -> {
-                            val ex = result.getException()
-                            Log.d("response", ex.toString())
+                            Log.d("miss", "miss")
                         }
                     }
                 }
                 .header(header).body(requestAdapter.toJson(sendday_3)) /*選択日の晩飯の画像を習得*/
-                .responseString { request, response, result ->
+                .response { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
-                        is com.github.kittinunf.result.Result.Success -> {
-                            val data = result.get()
-                            text_2.setText(data)
-                            Log.d("responce", data)
+                        is Result.Success -> {
+                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
+                            FirstView.setImageBitmap(bitmaper)
                         }
                         is Result.Failure -> {
-                            val ex = result.getException()
-                            Log.d("response", ex.toString())
+                            Log.d("miss", "miss")
                         }
                     }
                 }

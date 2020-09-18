@@ -37,8 +37,7 @@
                 <ImageView
                     android:id="@+id/FirstView"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@android:drawable/ic_menu_gallery" />
+                    android:layout_height="100dp" />
 
                 <ImageView
                     android:id="@+id/SecondView"
