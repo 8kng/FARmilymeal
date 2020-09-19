@@ -1,6 +1,7 @@
 package mi191324.example.myapplication
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -64,10 +65,12 @@ class HomeFragment : Fragment() {
             .setTitle("ただいまお食事をしているようです!")
             .setMessage("電話を掛けますか?")
             .setPositiveButton("Yes", { dialog, which ->
-
+                val callIntent: Intent = Uri.parse("tel:07038027280").let { number ->
+                    Intent(Intent.ACTION_DIAL, number)
+                }
+                startActivity(callIntent)
             })
             .setNegativeButton("No", { dialog, which ->
-                val uri: Uri = Uri.parse("http://www.android.com")
 
             })
             .show()

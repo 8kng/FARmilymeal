@@ -79,7 +79,6 @@ class CalenderFragment<Boolen> : Fragment() {
         val date = Date()
         val format = SimpleDateFormat("yyyyMd", Locale.getDefault())
         val now = format.format(date)
-        text.setText(now)/*後で削除*/
         /*現日時に対応する写真を習得*/
         var nowday_1 = now.toString() + "_1"
         var nowday_2 = now.toString() + "_2"
@@ -87,7 +86,6 @@ class CalenderFragment<Boolen> : Fragment() {
         val Daydate_1 = CalenderFragment.DayRequest(date = nowday_1)
         val Daydate_2 = CalenderFragment.DayRequest(date = nowday_2)
         val Daydate_3 = CalenderFragment.DayRequest(date = nowday_3)
-        text.setText(nowday_1)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_1)) /*今日の朝ご飯の画像を取得*/
@@ -100,7 +98,6 @@ class CalenderFragment<Boolen> : Fragment() {
                         Picasso.get()
                             .load(photouri)
                             .into(FirstView)
-                        text.setText(photo)
                         Log.d("send", nowday_1)
                     }
                     is Result.Failure -> {
@@ -108,6 +105,9 @@ class CalenderFragment<Boolen> : Fragment() {
                     }
                 }
             }
+        httpAsync.join()
+        val httpafter = (baseUrl)
+            .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_2)) /*今日の昼ごはんの画像習得*/
             .responseString(){ request, response, result ->
                 Log.d("hoge", result.toString())
@@ -118,7 +118,6 @@ class CalenderFragment<Boolen> : Fragment() {
                         Picasso.get()
                             .load(photouri)
                             .into(SecondView)
-                        text_2.setText(photo)
                         Log.d("send", nowday_2)
                     }
                     is Result.Failure -> {
@@ -126,6 +125,9 @@ class CalenderFragment<Boolen> : Fragment() {
                     }
                 }
             }
+        httpafter.join()
+        val httpe = (baseUrl)
+            .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_3)) /*今日の晩御飯の画像を習得*/
             .responseString(){ request, response, result ->
                 Log.d("hoge", result.toString())
@@ -136,7 +138,6 @@ class CalenderFragment<Boolen> : Fragment() {
                         Picasso.get()
                             .load(photouri)
                             .into(ThirdView)
-                        text_3.setText(photo)
                         Log.d("send", nowday_3)
                     }
                     is Result.Failure -> {
@@ -144,7 +145,7 @@ class CalenderFragment<Boolen> : Fragment() {
                     }
                 }
             }
-        httpAsync.join()
+        httpe.join()
         /*カレンダータップ時日時情報取得＆サーバーから対応する写真受信*/
         calenderView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val monthe = month + 1 /*月情報は一か月ずれるから修正*/
@@ -155,8 +156,6 @@ class CalenderFragment<Boolen> : Fragment() {
             val sendday_1 = CalenderFragment.DayRequest(date = selectday_1)
             val sendday_2 = CalenderFragment.DayRequest(date = selectday_2)
             val sendday_3 = CalenderFragment.DayRequest(date = selectday_3)
-            text.setText(selectday_1)
-            text_2.setText("2020919_1")
             val httpAsync = (baseUrl)
                 .httpPost()
                 .header(header).body(requestAdapter.toJson(sendday_1)) /*選択日の朝ご飯の画像を習得*/
@@ -169,7 +168,6 @@ class CalenderFragment<Boolen> : Fragment() {
                             Picasso.get()
                                 .load(photouri)
                                 .into(FirstView)
-                            text.setText(photo)
                             Log.d("send", selectday_1)
                         }
                         is Result.Failure -> {
@@ -177,6 +175,9 @@ class CalenderFragment<Boolen> : Fragment() {
                         }
                     }
                 }
+            httpAsync.join()
+            val httpAync = (baseUrl)
+                .httpPost()
                 .header(header).body(requestAdapter.toJson(sendday_2)) /*選択日の昼飯の画像を習得*/
                 .responseString() { request, response, result ->
                     Log.d("hoge", result.toString())
@@ -187,7 +188,6 @@ class CalenderFragment<Boolen> : Fragment() {
                             Picasso.get()
                                 .load(photouri)
                                 .into(SecondView)
-                            text_2.setText(photo)
                             Log.d("send", selectday_2)
                         }
                         is Result.Failure -> {
@@ -195,6 +195,9 @@ class CalenderFragment<Boolen> : Fragment() {
                         }
                     }
                 }
+            httpAync.join()
+            val httpAnc = (baseUrl)
+                .httpPost()
                 .header(header).body(requestAdapter.toJson(sendday_3)) /*選択日の晩飯の画像を習得*/
                 .responseString() { request, response, result ->
                     Log.d("hoge", result.toString())
@@ -205,7 +208,6 @@ class CalenderFragment<Boolen> : Fragment() {
                             Picasso.get()
                                 .load(photouri)
                                 .into(SecondView)
-                            text_3.setText(photo)
                             Log.d("send", selectday_3)
                         }
                         is Result.Failure -> {
@@ -213,7 +215,7 @@ class CalenderFragment<Boolen> : Fragment() {
                         }
                     }
                 }
-            httpAsync.join()
+            httpAnc.join()
         }
         return View
     }
