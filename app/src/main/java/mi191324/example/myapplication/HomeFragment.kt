@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
+
         return View
     }
 

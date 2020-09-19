@@ -1,6 +1,6 @@
 package mi191324.example.myapplication
 
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_calender.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -90,11 +91,17 @@ class CalenderFragment<Boolen> : Fragment() {
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_1)) /*今日の朝ご飯の画像を取得*/
-            .response(){ request, response, result ->
+            .responseString{ request, response, result ->
                 when(result){
                     is Result.Success -> {
-                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                        FirstView.setImageBitmap(bitmaper)
+                        val photo = result.get()
+                        val photouri:Uri = Uri.parse(photo)
+                        FirstView.setImageURI(photouri)
+                        Picasso.get()
+                            .load(photouri)
+                            .into(FirstView)
+                        text.setText(photo)
+                        Log.d("miss", nowday_1)
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -102,12 +109,17 @@ class CalenderFragment<Boolen> : Fragment() {
                 }
             }
             .header(header).body(requestAdapter.toJson(Daydate_2)) /*今日の昼ごはんの画像習得*/
-            .response{ request, response, result ->
+            .responseString(){ request, response, result ->
                 Log.d("hoge", result.toString())
                 when(result){
                     is Result.Success -> {
-                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                        FirstView.setImageBitmap(bitmaper)
+                        val photo: String = result.get()
+                        val photouri:Uri = Uri.parse(photo)
+                        Picasso.get()
+                            .load(photouri)
+                            .into(SecondView)
+                        text_2.setText(photo)
+                        Log.d("miss", nowday_2)
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -115,12 +127,17 @@ class CalenderFragment<Boolen> : Fragment() {
                 }
             }
             .header(header).body(requestAdapter.toJson(Daydate_3)) /*今日の晩御飯の画像を習得*/
-            .response{ request, response, result ->
+            .responseString(){ request, response, result ->
                 Log.d("hoge", result.toString())
                 when(result){
                     is Result.Success -> {
-                        val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                        FirstView.setImageBitmap(bitmaper)
+                        val photo = result.get()
+                        val photouri:Uri = Uri.parse(photo)
+                        Picasso.get()
+                            .load(photouri)
+                            .into(ThirdView)
+                        text_3.setText(photo)
+                        Log.d("miss", "aaa")
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -139,15 +156,20 @@ class CalenderFragment<Boolen> : Fragment() {
             val sendday_2 = CalenderFragment.DayRequest(date = selectday_2)
             val sendday_3 = CalenderFragment.DayRequest(date = selectday_3)
             text.setText(selectday_1)
+            text_2.setText("2020919_1")
             val httpAsync = (baseUrl)
                 .httpPost()
                 .header(header).body(requestAdapter.toJson(sendday_1)) /*選択日の朝ご飯の画像を習得*/
-                .response { request, response, result ->
+                .responseString() { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
                         is Result.Success -> {
-                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                            FirstView.setImageBitmap(bitmaper)
+                            val photo = result.get()
+                            val photouri:Uri = Uri.parse(photo)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(FirstView)
+                            text.setText(photo)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -155,12 +177,16 @@ class CalenderFragment<Boolen> : Fragment() {
                     }
                 }
                 .header(header).body(requestAdapter.toJson(sendday_2)) /*選択日の昼飯の画像を習得*/
-                .response { request, response, result ->
+                .responseString() { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
                         is Result.Success -> {
-                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                            FirstView.setImageBitmap(bitmaper)
+                            val photo = result.get()
+                            val photouri:Uri = Uri.parse(photo)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(SecondView)
+                            text.setText(photo)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -168,12 +194,16 @@ class CalenderFragment<Boolen> : Fragment() {
                     }
                 }
                 .header(header).body(requestAdapter.toJson(sendday_3)) /*選択日の晩飯の画像を習得*/
-                .response { request, response, result ->
+                .responseString() { request, response, result ->
                     Log.d("hoge", result.toString())
                     when (result) {
                         is Result.Success -> {
-                            val bitmaper = BitmapFactory.decodeByteArray(result.get(), 50, 50)
-                            FirstView.setImageBitmap(bitmaper)
+                            val photo = result.get()
+                            val photouri:Uri = Uri.parse(photo)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(SecondView)
+                            text.setText(photo)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
