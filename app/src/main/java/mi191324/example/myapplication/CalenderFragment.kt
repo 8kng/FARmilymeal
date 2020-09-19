@@ -187,7 +187,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             Picasso.get()
                                 .load(photouri)
                                 .into(SecondView)
-                            text.setText(photo)
+                            text_2.setText(photo)
                             Log.d("send", selectday_2)
                         }
                         is Result.Failure -> {
@@ -205,7 +205,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             Picasso.get()
                                 .load(photouri)
                                 .into(SecondView)
-                            text.setText(photo)
+                            text_3.setText(photo)
                             Log.d("send", selectday_3)
                         }
                         is Result.Failure -> {

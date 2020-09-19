@@ -1,5 +1,7 @@
 package mi191324.example.myapplication
 
+import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,8 +55,22 @@ class HomeFragment : Fragment() {
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
-
+        popupWindow()
         return View
+    }
+
+    private fun popupWindow(){
+        AlertDialog.Builder(requireContext())
+            .setTitle("ただいまお食事をしているようです!")
+            .setMessage("電話を掛けますか?")
+            .setPositiveButton("Yes", { dialog, which ->
+
+            })
+            .setNegativeButton("No", { dialog, which ->
+                val uri: Uri = Uri.parse("http://www.android.com")
+
+            })
+            .show()
     }
 
     companion object {
