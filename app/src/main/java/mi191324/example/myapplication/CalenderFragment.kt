@@ -101,7 +101,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             .load(photouri)
                             .into(FirstView)
                         text.setText(photo)
-                        Log.d("miss", nowday_1)
+                        Log.d("send", nowday_1)
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -119,7 +119,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             .load(photouri)
                             .into(SecondView)
                         text_2.setText(photo)
-                        Log.d("miss", nowday_2)
+                        Log.d("send", nowday_2)
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -137,7 +137,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             .load(photouri)
                             .into(ThirdView)
                         text_3.setText(photo)
-                        Log.d("miss", "aaa")
+                        Log.d("send", nowday_3)
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -170,6 +170,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 .load(photouri)
                                 .into(FirstView)
                             text.setText(photo)
+                            Log.d("send", selectday_1)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -187,6 +188,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 .load(photouri)
                                 .into(SecondView)
                             text.setText(photo)
+                            Log.d("send", selectday_2)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -204,6 +206,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 .load(photouri)
                                 .into(SecondView)
                             text.setText(photo)
+                            Log.d("send", selectday_3)
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
