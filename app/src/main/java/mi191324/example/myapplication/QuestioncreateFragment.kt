@@ -42,7 +42,8 @@ class QuestioncreateFragment : Fragment(){
     }
 
     data class QuestionRequest (
-        val context: String
+        val context: String,
+        val id: Int
     )
 
     override fun onCreateView(
@@ -139,7 +140,7 @@ class QuestioncreateFragment : Fragment(){
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/json")
-        val Question1 = QuestionRequest(context = Question1editor.getText().toString())
+        val Question1 = QuestionRequest(context = Question1editor.getText().toString(), id = 1)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Question1))
@@ -172,11 +173,11 @@ class QuestioncreateFragment : Fragment(){
         val editor = pref.edit()
         editor.putString("Question2", Question2editor.text.toString())
             .apply()
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion2"
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
-        val Question2 = QuestionRequest(context = Question2editor.getText().toString())
+        val Question2 = QuestionRequest(context = Question2editor.getText().toString(), id = 2)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Question2))
@@ -199,7 +200,7 @@ class QuestioncreateFragment : Fragment(){
         myToast.show()
     }
     private fun saveDate3(){
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion3"
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question3", Question3editor.text.toString())
@@ -207,7 +208,7 @@ class QuestioncreateFragment : Fragment(){
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
-        val Question3 = QuestionRequest(context = Question3editor.getText().toString())
+        val Question3 = QuestionRequest(context = Question3editor.getText().toString(), id = 3)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Question3))
@@ -230,7 +231,7 @@ class QuestioncreateFragment : Fragment(){
         myToast.show()
     }
     private fun saveDate4(){
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion4"
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question4", Question1editor.text.toString())
@@ -238,7 +239,7 @@ class QuestioncreateFragment : Fragment(){
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
-        val Question4 = QuestionRequest(context = Question4editor.getText().toString())
+        val Question4 = QuestionRequest(context = Question4editor.getText().toString(), id = 4)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Question4))
@@ -261,7 +262,7 @@ class QuestioncreateFragment : Fragment(){
         myToast.show()
     }
     private fun saveDate5(){
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion5"
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
         editor.putString("Question5", Question1editor.text.toString())
@@ -269,7 +270,7 @@ class QuestioncreateFragment : Fragment(){
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(QuestionRequest::class.java)
         val header: HashMap<String, String> = hashMapOf("Content-Type" to "application/Json")
-        val Question5 = QuestionRequest(context = Question5editor.getText().toString())
+        val Question5 = QuestionRequest(context = Question5editor.getText().toString(), id = 5)
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Question5))
