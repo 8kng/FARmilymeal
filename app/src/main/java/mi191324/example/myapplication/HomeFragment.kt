@@ -62,14 +62,7 @@ class HomeFragment : Fragment() {
         return View
     }
 
-    data class Get(
-        var id : Int,
-        var date : String
-    )
-
-
-
-    private fun dataget(){
+    private fun dataget(){  /*HTTPGETでurl&date情報を受け取る*/
         val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = httpurl
@@ -89,6 +82,11 @@ class HomeFragment : Fragment() {
             }
         httpAsync.join()
     }
+
+    data class Get(
+        var id : Int,
+        var date : String
+    )
 
     class Getdatas : ResponseDeserializable<Get> {
         public fun putlist(content: String): List<Get>? {
