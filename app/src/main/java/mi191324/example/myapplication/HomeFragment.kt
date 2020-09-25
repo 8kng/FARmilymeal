@@ -4,12 +4,21 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.time.DateTimeException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,12 +35,52 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var photolist = arrayOfNulls<Uri>(20)
+    var datelist = arrayOfNulls<DateTimeException>(20)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    data class Get(
+        var id : Int,
+        var date : String
+    )
+
+
+
+    private fun dataget(){
+        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val httpAsync = httpurl
+            .httpGet()
+            .responseObject(Getdatas()){request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result){
+                    is Result.Success -> {
+                        val (user, err) = result
+                        Log.d("OK", "${user}")
+                    }
+                    is Result.Failure -> {
+                        val (user, err) = result
+                        Log.d("No", "${user}")
+                    }
+                }
+            }
+        httpAsync.join()
+    }
+
+    class Getdatas : ResponseDeserializable<Get> {
+        public fun putlist(content: String): List<Get>? {
+            val moshi = Moshi.Builder().build()
+            val type = Types.newParameterizedType(List::class.java, Get::class.java)
+            val listAdpter: JsonAdapter<List<Get>> = moshi.adapter(type)
+
+            return listAdpter.fromJson(content)
         }
     }
 
@@ -52,11 +101,12 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val View =  inflater.inflate(R.layout.fragment_home, container, false)
         val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
+        dataget()
         val exampleList = generateDummyList(20)
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
-        popupWindow()
+
         return View
     }
 
@@ -71,7 +121,11 @@ class HomeFragment : Fragment() {
                 startActivity(callIntent)
             })
             .setNegativeButton("No", { dialog, which ->
-
+                val title:String = "photo"
+                val bundle = Bundle()
+                bundle.putString("BUNDLE_KEY", title)
+                val fragment = NotificationFragment()
+                fragment.setArguments(bundle)
             })
             .show()
     }

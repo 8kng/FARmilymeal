@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,7 +35,11 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        val View = inflater.inflate(R.layout.fragment_notification, container, false)
+        val testText: TextView = View.findViewById(R.id.testText)
+        val args = arguments?.getString("BUNDLE_KEY")
+        testText.setText(args)
+        return View
     }
 
     companion object {
