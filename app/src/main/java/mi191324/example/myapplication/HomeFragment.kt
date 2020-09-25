@@ -85,6 +85,7 @@ class HomeFragment : Fragment() {
 
     data class Get(
         var id : Int,
+        var url : String,
         var date : String
     )
 
@@ -93,12 +94,11 @@ class HomeFragment : Fragment() {
             val moshi = Moshi.Builder().build()
             val type = Types.newParameterizedType(List::class.java, Get::class.java)
             val listAdpter: JsonAdapter<List<Get>> = moshi.adapter(type)
-
             return listAdpter.fromJson(content)
         }
     }
 
-    private fun generateDummyList(size: Int): List<ExampleItem>{
+    private fun generateDummyList(size: Int): List<ExampleItem>{  /*リスト表示*/
         val List = ArrayList<ExampleItem>()
         for (i in 0 until size) {
             val drawable = R.drawable.ic_baseline_fastfood_24
