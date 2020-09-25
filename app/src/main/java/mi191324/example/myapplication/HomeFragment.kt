@@ -46,6 +46,22 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val View =  inflater.inflate(R.layout.fragment_home, container, false)
+        val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
+        dataget()
+        val exampleList = generateDummyList(20)
+        recycler_view.adapter = HomeAdpter(exampleList)
+        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.setHasFixedSize(true)
+
+        return View
+    }
+
     data class Get(
         var id : Int,
         var date : String
@@ -94,33 +110,17 @@ class HomeFragment : Fragment() {
         return List
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val View =  inflater.inflate(R.layout.fragment_home, container, false)
-        val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
-        dataget()
-        val exampleList = generateDummyList(20)
-        recycler_view.adapter = HomeAdpter(exampleList)
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.setHasFixedSize(true)
-
-        return View
-    }
-
-    private fun popupWindow(){
+    private fun popupWindow(){  /*電話をかけるかのポップアップウィンドウ表示*/
         AlertDialog.Builder(requireContext())
             .setTitle("ただいまお食事をしているようです!")
             .setMessage("電話を掛けますか?")
-            .setPositiveButton("Yes", { dialog, which ->
+            .setPositiveButton("Yes", { dialog, which ->  /*電話をすると選択時*/
                 val callIntent: Intent = Uri.parse("tel:07038027280").let { number ->
                     Intent(Intent.ACTION_DIAL, number)
                 }
                 startActivity(callIntent)
             })
-            .setNegativeButton("No", { dialog, which ->
+            .setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
                 val title:String = "photo"
                 val bundle = Bundle()
                 bundle.putString("BUNDLE_KEY", title)
