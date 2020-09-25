@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.JsonAdapter
@@ -19,6 +20,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.time.DateTimeException
+import androidx.appcompat.app.AppCompatActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -67,7 +69,7 @@ class HomeFragment : Fragment() {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = httpurl
             .httpGet()
-            .responseObject(Getdatas()){request, response, result ->
+            .responseObject<PhotoList>{request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result){
                     is Result.Success -> {
@@ -83,13 +85,17 @@ class HomeFragment : Fragment() {
         httpAsync.join()
     }
 
-    data class Get(
+    data class Photo(
         var id : Int,
         var url : String,
         var date : String
     )
 
-    class Getdatas : ResponseDeserializable<Get> {
+    data class PhotoList(
+        val photos: List<Photo>
+    )
+
+    class PhotoListDeserializer : ResponseDeserializable<Get> {
         public fun putlist(content: String): List<Get>? {
             val moshi = Moshi.Builder().build()
             val type = Types.newParameterizedType(List::class.java, Get::class.java)
