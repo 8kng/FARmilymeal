@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
     data class Photo(
         var id : Int,
         var url : String,
-        var date : String
+        var datetime : String
     )
 
     data class PhotoList(
