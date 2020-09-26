@@ -8,11 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.ResponseDeserializable
-import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.JsonAdapter
@@ -20,7 +20,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.time.DateTimeException
-import androidx.appcompat.app.AppCompatActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,7 +59,7 @@ class HomeFragment : Fragment() {
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
-
+        popupWindow()
         return View
     }
 
@@ -69,7 +68,7 @@ class HomeFragment : Fragment() {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = httpurl
             .httpGet()
-            .responseObject<PhotoList>{request, response, result ->
+            .responseObject(PhotoListDeserializer()){ request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result){
                     is Result.Success -> {
@@ -86,20 +85,20 @@ class HomeFragment : Fragment() {
     }
 
     data class Photo(
-        var id : Int,
-        var url : String,
-        var datetime : String
+        var id: Int,
+        var url: String,
+        var datetime: String
     )
 
-    data class PhotoList(
+    data class PhotoListResponse(
         val photos: List<Photo>
     )
 
-    class PhotoListDeserializer : ResponseDeserializable<Get> {
-        public fun putlist(content: String): List<Get>? {
+    class PhotoListDeserializer : ResponseDeserializable<Photo> {
+        public fun putlist(content: String): List<Photo>? {
             val moshi = Moshi.Builder().build()
-            val type = Types.newParameterizedType(List::class.java, Get::class.java)
-            val listAdpter: JsonAdapter<List<Get>> = moshi.adapter(type)
+            val type = Types.newParameterizedType(List::class.java, Photo::class.java)
+            val listAdpter: JsonAdapter<List<Photo>> = moshi.adapter(type)
             return listAdpter.fromJson(content)
         }
     }
@@ -125,11 +124,16 @@ class HomeFragment : Fragment() {
                 startActivity(callIntent)
             })
             .setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
-                val title:String = "photo"
-                val bundle = Bundle()
-                bundle.putString("BUNDLE_KEY", title)
-                val fragment = NotificationFragment()
-                fragment.setArguments(bundle)
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.setAction("android.intent.category.LAUNCHER")
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.setClassName("com.google.android.apps.tachyon", "com.google.android.apps.tachyon.MainActivity");
+                try{
+                    startActivity(intent)
+                } catch (e: Exception){
+                    val Toast: Toast = Toast.makeText(getActivity(), "アプリが見つかりません", Toast.LENGTH_LONG)
+                    Toast.show()
+                }
             })
             .show()
     }
