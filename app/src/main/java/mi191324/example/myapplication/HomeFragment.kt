@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.JsonAdapter
@@ -59,7 +60,6 @@ class HomeFragment : Fragment() {
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
-        popupWindow()
         return View
     }
 
@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = httpurl
             .httpGet()
-            .responseObject(PhotoListDeserializer()){ request, response, result ->
+            .responseObject<PhotoListResponse>{ request, response, result ->
                 Log.d("hoge", result.toString())
                 when (result){
                     is Result.Success -> {
