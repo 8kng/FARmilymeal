@@ -12,13 +12,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.kittinunf.fuel.core.ResponseDeserializable
-import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.time.DateTimeException
 
@@ -55,7 +51,6 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val View =  inflater.inflate(R.layout.fragment_home, container, false)
         val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
-        dataget()
         val exampleList = generateDummyList(20)
         recycler_view.adapter = HomeAdpter(exampleList)
         recycler_view.layoutManager = LinearLayoutManager(context)
@@ -63,17 +58,26 @@ class HomeFragment : Fragment() {
         return View
     }
 
-    private fun dataget(){  /*HTTPGETでurl&date情報を受け取る*/
+    private fun getdata(): PhotoListResponse? {
         val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        var res: PhotoListResponse? = null
+        val datelist = arrayOfNulls<String>(20)
         val httpAsync = httpurl
             .httpGet()
-            .responseObject<PhotoListResponse>{ request, response, result ->
+            .responseString() { request, response, result ->
                 Log.d("hoge", result.toString())
-                when (result){
+                when (result) {
                     is Result.Success -> {
-                        val (user, err) = result
-                        Log.d("OK", "${user}")
+                        val data = result.get()
+                        Log.d("response", data)
+                        res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)!!
+                        Log.d("data", res.toString())
+                        res?.photos?.forEach { photo ->
+                            Log.d("photo", photo.id.toString())
+                            Log.d("photo", photo.url.toString())
+                            Log.d("photo", photo.datetime.toString())
+                        }
                     }
                     is Result.Failure -> {
                         val (user, err) = result
@@ -82,6 +86,7 @@ class HomeFragment : Fragment() {
                 }
             }
         httpAsync.join()
+        return res
     }
 
     data class Photo(
@@ -94,21 +99,24 @@ class HomeFragment : Fragment() {
         val photos: List<Photo>
     )
 
-    class PhotoListDeserializer : ResponseDeserializable<Photo> {
-        public fun putlist(content: String): List<Photo>? {
-            val moshi = Moshi.Builder().build()
-            val type = Types.newParameterizedType(List::class.java, Photo::class.java)
-            val listAdpter: JsonAdapter<List<Photo>> = moshi.adapter(type)
-            return listAdpter.fromJson(content)
-        }
-    }
-
-    private fun generateDummyList(size: Int): List<ExampleItem>{  /*リスト表示*/
+    private fun generateDummyList(size: Int): List<ExampleItem> {  /*リスト表示*/
+        val res = getdata()
+        var urllist = arrayOfNulls<String>(20)
+        var datelist = arrayOfNulls<String>(20)
         val List = ArrayList<ExampleItem>()
+        val Judgment = res!!.photos.size
         for (i in 0 until size) {
-            val drawable = R.drawable.ic_baseline_fastfood_24
-            val item = ExampleItem(drawable, "Item $i", "Line 2")
-            List += item
+            if (i > Judgment) {
+                val URI = Uri.parse(res!!.photos[i].url)
+                val time = res!!.photos[i].datetime.toString()
+                val drawable = R.drawable.ic_baseline_fastfood_24
+                val item = ExampleItem(drawable, "食事の写真が届きました", time)
+                List += item
+            } else {
+                val drawable = R.drawable.ic_baseline_fastfood_24
+                val item = ExampleItem(drawable, "NO DATA", "----")
+                List += item
+            }
         }
         return List
     }
