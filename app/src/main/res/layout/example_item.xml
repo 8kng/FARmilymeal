@@ -12,9 +12,9 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_fastfood_24"/>
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_baseline_fastfood_24" />
 
         <TextView
             android:id="@+id/text_view_1"

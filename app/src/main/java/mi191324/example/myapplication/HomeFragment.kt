@@ -51,8 +51,28 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val View =  inflater.inflate(R.layout.fragment_home, container, false)
         val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
-        val exampleList = generateDummyList(20)
-        recycler_view.adapter = HomeAdpter(exampleList)
+
+        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val httpAsync = httpurl
+            .httpGet()
+            .responseString() { request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result) {
+                    is Result.Success -> {
+                        val data = result.get()
+                        Log.d("response", data)
+                        val res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)
+                        recycler_view.adapter = HomeAdpter(res!!.photos)
+                    }
+                    is Result.Failure -> {
+                        val (user, err) = result
+                        Log.d("No", "${user}")
+                    }
+                }
+            }
+        httpAsync.join()
+
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
         return View
@@ -98,28 +118,6 @@ class HomeFragment : Fragment() {
     data class PhotoListResponse(
         val photos: List<Photo>
     )
-
-    private fun generateDummyList(size: Int): List<ExampleItem> {  /*リスト表示*/
-        val res = getdata()
-        val List = ArrayList<ExampleItem>()
-        res?.photos?.forEach { photo ->
-            val Judgment = res.photos.size
-            for (i in 0 until size) {
-                if (i > Judgment) {
-                    val URI = Uri.parse(res.photos[i].url)
-                    val time = res.photos[i].datetime.toString()
-                    val drawable = R.drawable.ic_baseline_fastfood_24
-                    val item = ExampleItem(drawable, "食事の写真が届きました", time)
-                    List += item
-                } else {
-                    val drawable = R.drawable.ic_baseline_fastfood_24
-                    val item = ExampleItem(drawable, "NO DATA", "----")
-                    List += item
-                }
-            }
-        }
-        return List
-    }
 
     private fun popupWindow(){  /*電話をかけるかのポップアップウィンドウ表示*/
         AlertDialog.Builder(requireContext())
