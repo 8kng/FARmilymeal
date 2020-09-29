@@ -101,21 +101,21 @@ class HomeFragment : Fragment() {
 
     private fun generateDummyList(size: Int): List<ExampleItem> {  /*リスト表示*/
         val res = getdata()
-        var urllist = arrayOfNulls<String>(20)
-        var datelist = arrayOfNulls<String>(20)
         val List = ArrayList<ExampleItem>()
-        val Judgment = res!!.photos.size
-        for (i in 0 until size) {
-            if (i > Judgment) {
-                val URI = Uri.parse(res!!.photos[i].url)
-                val time = res!!.photos[i].datetime.toString()
-                val drawable = R.drawable.ic_baseline_fastfood_24
-                val item = ExampleItem(drawable, "食事の写真が届きました", time)
-                List += item
-            } else {
-                val drawable = R.drawable.ic_baseline_fastfood_24
-                val item = ExampleItem(drawable, "NO DATA", "----")
-                List += item
+        res?.photos?.forEach { photo ->
+            val Judgment = res.photos.size
+            for (i in 0 until size) {
+                if (i > Judgment) {
+                    val URI = Uri.parse(res.photos[i].url)
+                    val time = res.photos[i].datetime.toString()
+                    val drawable = R.drawable.ic_baseline_fastfood_24
+                    val item = ExampleItem(drawable, "食事の写真が届きました", time)
+                    List += item
+                } else {
+                    val drawable = R.drawable.ic_baseline_fastfood_24
+                    val item = ExampleItem(drawable, "NO DATA", "----")
+                    List += item
+                }
             }
         }
         return List
