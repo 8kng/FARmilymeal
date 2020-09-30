@@ -3,12 +3,14 @@ package mi191324.example.myapplication
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +18,9 @@ import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.text.SimpleDateFormat
 import java.time.DateTimeException
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +48,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +59,10 @@ class HomeFragment : Fragment() {
 
         val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val format = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+        val day = format.format(Date())
+        val calendar1 = Calendar.getInstance()
+
         val httpAsync = httpurl
             .httpGet()
             .responseString() { request, response, result ->
@@ -64,6 +73,20 @@ class HomeFragment : Fragment() {
                         Log.d("response", data)
                         val res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)
                         recycler_view.adapter = HomeAdpter(res!!.photos)
+                        val time1_be:Date = format.parse(res.photos[0].datetime)
+                        val time2:Date = format.parse(day)
+                        calendar1.setTime(time1_be)
+                        calendar1.add(Calendar.MINUTE, 20)
+                        calendar1.add(Calendar.DATE, 1)
+                        val time1_af = calendar1.getTime()
+                        Log.d("始まり", time1_be.toString())
+                        Log.d("現在", time2.toString())
+                        Log.d("終わり", time1_af.toString())
+                        if ((time1_be <= time2) && (time1_af >= time2)){
+                            popupWindow()
+                        }else {
+                            obpop()
+                        }
                     }
                     is Result.Failure -> {
                         val (user, err) = result
@@ -76,37 +99,6 @@ class HomeFragment : Fragment() {
         recycler_view.layoutManager = LinearLayoutManager(context)
         recycler_view.setHasFixedSize(true)
         return View
-    }
-
-    private fun getdata(): PhotoListResponse? {
-        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        var res: PhotoListResponse? = null
-        val datelist = arrayOfNulls<String>(20)
-        val httpAsync = httpurl
-            .httpGet()
-            .responseString() { request, response, result ->
-                Log.d("hoge", result.toString())
-                when (result) {
-                    is Result.Success -> {
-                        val data = result.get()
-                        Log.d("response", data)
-                        res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)!!
-                        Log.d("data", res.toString())
-                        res?.photos?.forEach { photo ->
-                            Log.d("photo", photo.id.toString())
-                            Log.d("photo", photo.url.toString())
-                            Log.d("photo", photo.datetime.toString())
-                        }
-                    }
-                    is Result.Failure -> {
-                        val (user, err) = result
-                        Log.d("No", "${user}")
-                    }
-                }
-            }
-        httpAsync.join()
-        return res
     }
 
     data class Photo(
@@ -124,12 +116,6 @@ class HomeFragment : Fragment() {
             .setTitle("ただいまお食事をしているようです!")
             .setMessage("電話を掛けますか?")
             .setPositiveButton("Yes", { dialog, which ->  /*電話をすると選択時*/
-                val callIntent: Intent = Uri.parse("tel:07038027280").let { number ->
-                    Intent(Intent.ACTION_DIAL, number)
-                }
-                startActivity(callIntent)
-            })
-            .setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.setAction("android.intent.category.LAUNCHER")
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -141,6 +127,15 @@ class HomeFragment : Fragment() {
                     Toast.show()
                 }
             })
+            .setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
+            })
+            .show()
+    }
+
+    private fun obpop(){
+        AlertDialog.Builder(requireContext())
+            .setTitle("遅いんだよ...")
+            .setMessage("電話を掛けれません")
             .show()
     }
 
