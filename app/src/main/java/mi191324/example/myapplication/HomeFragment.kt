@@ -84,8 +84,6 @@ class HomeFragment : Fragment() {
                         Log.d("終わり", time1_af.toString())
                         if ((time1_be <= time2) && (time1_af >= time2)){
                             popupWindow()
-                        }else {
-                            obpop()
                         }
                     }
                     is Result.Failure -> {
@@ -129,13 +127,6 @@ class HomeFragment : Fragment() {
             })
             .setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
             })
-            .show()
-    }
-
-    private fun obpop(){
-        AlertDialog.Builder(requireContext())
-            .setTitle("遅いんだよ...")
-            .setMessage("電話を掛けれません")
             .show()
     }
 
