@@ -1,11 +1,17 @@
 package mi191324.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,11 +42,44 @@ class NotificationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val View = inflater.inflate(R.layout.fragment_notification, container, false)
-        val testText: TextView = View.findViewById(R.id.testText)
-        val args = arguments?.getString("BUNDLE_KEY")
-        testText.setText(args)
+        val recyclerView:RecyclerView = View.findViewById(R.id.recycler_me)
+
+        val http = "https://asia-northeast1-farmily-meal.cloudfunctions.net/message_function"
+        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+        val httpAsync = http
+            .httpGet()
+            .responseString(){request, response, result ->
+                Log.d("hoge", result.toString())
+                when (result) {
+                    is Result.Success -> {
+                        val data = result.get()
+                        Log.d("data", data)
+                        val res = moshi.adapter(MessageListResponse::class.java).fromJson(data)
+                        recyclerView.adapter = MessageAdapter(res!!.texts)
+                    }
+                    is Result.Failure -> {
+                        val (user, err) = result
+                        Log.d("No", "${user}")
+                    }
+                }
+            }
+        httpAsync.join()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
         return View
     }
+
+    data class Message(
+        var id: Int,
+        var kind: String,
+        var text: String
+    )
+
+    data class MessageListResponse(
+        val texts: List<Message>
+    )
 
     companion object {
         /**

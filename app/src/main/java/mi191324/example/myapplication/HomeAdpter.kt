@@ -29,9 +29,8 @@ class HomeAdpter(private val photoList: List<HomeFragment.Photo>) : RecyclerView
     override fun getItemCount() = photoList.size
 
     class ExampleViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.image_view)
-        val textView1: TextView = itemView.findViewById(R.id.text_view_1)
-        val textView2: TextView = itemView.findViewById(R.id.text_view_2)
-
+        val imageView: ImageView = itemView.findViewById(R.id.m_item_view)
+        val textView1: TextView = itemView.findViewById(R.id.m_item_text)
+        val textView2: TextView = itemView.findViewById(R.id.m_item2_text)
     }
 }

@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val View =  inflater.inflate(R.layout.fragment_home, container, false)
-        val recycler_view : RecyclerView = View.findViewById(R.id.recycler_view)
+        val recycler_view : RecyclerView = View.findViewById(R.id.recycler_me)
 
         val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -73,6 +73,7 @@ class HomeFragment : Fragment() {
                         Log.d("response", data)
                         val res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)
                         recycler_view.adapter = HomeAdpter(res!!.photos)
+
                         val time1_be:Date = format.parse(res.photos[0].datetime)
                         val time2:Date = format.parse(day)
                         calendar1.setTime(time1_be)
