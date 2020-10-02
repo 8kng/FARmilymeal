@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 
 class MessageAdapter(private val MessageList: List<NotificationFragment.Message>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -16,11 +15,16 @@ class MessageAdapter(private val MessageList: List<NotificationFragment.Message>
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = MessageList[position]
-        Picasso.get()
-            .load("https://storage.googleapis.com/meal_phot/2020922_1.jpeg")
-            .into(holder.imageView)
-        holder.textView1.text = currentItem.text
-        holder.textView2.text = currentItem.kind
+
+        if (currentItem.kind == "out"){
+            holder.textView1.text = "外出のお知らせ"
+            holder.textView2.text = currentItem.text
+            holder.imageView.setImageResource(R.drawable.ic_baseline_restaurant_24)
+        } else {
+            holder.textView1.text = ""
+            holder.textView2.text = currentItem.text
+            holder.imageView.setImageResource(R.drawable.ic_baseline_sms_24)
+        }
     }
     override fun getItemCount() = MessageList.size
 
