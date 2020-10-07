@@ -118,11 +118,11 @@ class HomeFragment : Fragment() {
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.setAction("android.intent.category.LAUNCHER")
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.setClassName("com.google.android.apps.tachyon", "com.google.android.apps.tachyon.MainActivity");
+                intent.setClassName("com.google.android.apps.tachyon", "com.google.android.apps.tachyon.MainActivity"); /*Duoアプリに移動*/
                 try{
                     startActivity(intent)
                 } catch (e: Exception){
-                    val Toast: Toast = Toast.makeText(getActivity(), "アプリが見つかりません", Toast.LENGTH_LONG)
+                    val Toast: Toast = Toast.makeText(getActivity(), "アプリが見つかりません", Toast.LENGTH_LONG) /*アプリが見つからなかった場合*/
                     Toast.show()
                 }
             })

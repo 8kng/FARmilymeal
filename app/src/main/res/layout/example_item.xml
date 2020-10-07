@@ -26,19 +26,8 @@
             android:layout_toRightOf="@id/m_item_view"
             android:text="Line1"
             android:textColor="#4a4a4a"
-            android:textSize="18sp"
+            android:textSize="15dp"
             android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/m_item2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Line2"
-            android:textColor="#4a4a4a"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@id/m_item_view"
-            android:layout_below="@id/m_item_text"
-            android:layout_toRightOf="@id/m_item_view"/>
 
 
     </RelativeLayout>

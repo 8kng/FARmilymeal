@@ -21,7 +21,7 @@ class MessageAdapter(private val MessageList: List<NotificationFragment.Message>
             holder.textView2.text = currentItem.text
             holder.imageView.setImageResource(R.drawable.ic_baseline_restaurant_24)
         } else {
-            holder.textView1.text = ""
+            holder.textView1.text = currentItem.kind + "の解答"
             holder.textView2.text = currentItem.text
             holder.imageView.setImageResource(R.drawable.ic_baseline_sms_24)
         }

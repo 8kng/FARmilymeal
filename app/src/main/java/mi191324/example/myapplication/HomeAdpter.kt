@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeAdpter(private val photoList: List<HomeFragment.Photo>) : RecyclerView.Adapter<HomeAdpter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
@@ -18,19 +20,21 @@ class HomeAdpter(private val photoList: List<HomeFragment.Photo>) : RecyclerView
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
         val currentItem = photoList[position]
         val Uri = Uri.parse(currentItem.url)
+        val format = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+        val datetime: Date = format.parse(currentItem.datetime)
+        val df = SimpleDateFormat("yyyy年MM月dd日HH時mm分ss分に\n届きました")
+        val datestr = df.format(datetime)
 
         Picasso.get()
             .load(Uri)
             .fit()
             .into(holder.imageView)
-        holder.textView1.text = "写真が届きました!"
-        holder.textView2.text = currentItem.datetime
+        holder.textView1.text = datestr
     }
     override fun getItemCount() = photoList.size
 
     class ExampleViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.m_item_view)
         val textView1: TextView = itemView.findViewById(R.id.m_item_text)
-        val textView2: TextView = itemView.findViewById(R.id.m_item2_text)
     }
 }
