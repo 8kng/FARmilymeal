@@ -135,7 +135,7 @@ class MessagecreateFragment : Fragment() {
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         val storageRef = recordPath + "/" + recordFile
 
-        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyvoice"
+        val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/voice_message"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val httpAsync = (baseUrl)
             .httpUpload()

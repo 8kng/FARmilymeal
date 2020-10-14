@@ -1,5 +1,6 @@
 package mi191324.example.myapplication
 
+import android.app.ProgressDialog
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.kittinunf.fuel.httpPost
@@ -71,6 +73,10 @@ class CalenderFragment<Boolen> : Fragment() {
         val text: TextView = View.findViewById(R.id.FirstText)
         val text_2: TextView = View.findViewById(R.id.SecondText)
         val text_3: TextView = View.findViewById(R.id.ThirdText)
+        val progress:ProgressBar = View.findViewById(R.id.progress)
+        val progressDialog = ProgressDialog(requireContext());
+        progressDialog.setTitle("ダウンロード中...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/Calender_phot"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val requestAdapter = moshi.adapter(CalenderFragment.DayRequest::class.java)
@@ -86,6 +92,9 @@ class CalenderFragment<Boolen> : Fragment() {
         val Daydate_1 = CalenderFragment.DayRequest(date = nowday_1)
         val Daydate_2 = CalenderFragment.DayRequest(date = nowday_2)
         val Daydate_3 = CalenderFragment.DayRequest(date = nowday_3)
+
+        progress.setVisibility(android.widget.ProgressBar.VISIBLE)
+
         val httpAsync = (baseUrl)
             .httpPost()
             .header(header).body(requestAdapter.toJson(Daydate_1)) /*今日の朝ご飯の画像を取得*/
@@ -146,8 +155,10 @@ class CalenderFragment<Boolen> : Fragment() {
                 }
             }
         httpe.join()
+        progress.setVisibility(android.widget.ProgressBar.INVISIBLE)
         /*カレンダータップ時日時情報取得＆サーバーから対応する写真受信*/
         calenderView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            progress.setVisibility(android.widget.ProgressBar.VISIBLE)
             val monthe = month + 1 /*月情報は一か月ずれるから修正*/
             val date = "$year$monthe$dayOfMonth"
             val selectday_1 = date + "_1"
@@ -215,6 +226,7 @@ class CalenderFragment<Boolen> : Fragment() {
                         }
                     }
                 }
+            progress.setVisibility(android.widget.ProgressBar.INVISIBLE)
             httpAnc.join()
         }
         return View

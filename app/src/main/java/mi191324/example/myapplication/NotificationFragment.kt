@@ -1,5 +1,6 @@
 package mi191324.example.myapplication
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -47,7 +48,11 @@ class NotificationFragment : Fragment() {
         val http = "https://asia-northeast1-farmily-meal.cloudfunctions.net/message_function"
         val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
+        val progressDialog = ProgressDialog(requireContext());
+        progressDialog.setTitle("タイトル");
+        progressDialog.setMessage("メッセージ");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         val httpAsync = http
             .httpGet()
             .responseString(){request, response, result ->
@@ -68,6 +73,7 @@ class NotificationFragment : Fragment() {
         httpAsync.join()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
+        progressDialog.dismiss()
         return View
     }
 
