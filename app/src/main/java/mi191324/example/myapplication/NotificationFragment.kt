@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,6 +68,8 @@ class NotificationFragment : Fragment() {
                     is Result.Failure -> {
                         val (user, err) = result
                         Log.d("No", "${user}")
+                        val myToast: Toast = Toast.makeText(getActivity(), "データの受信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }

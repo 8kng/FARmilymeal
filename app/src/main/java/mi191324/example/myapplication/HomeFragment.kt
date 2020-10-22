@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
                     is Result.Failure -> {
                         val (user, err) = result
                         Log.d("No", "${user}")
-                        val myToast: Toast = Toast.makeText(getActivity(), "データのの受信に失敗しました", Toast.LENGTH_LONG)
+                        val myToast: Toast = Toast.makeText(getActivity(), "データの受信に失敗しました", Toast.LENGTH_LONG)
                         myToast.show()
                     }
                 }
