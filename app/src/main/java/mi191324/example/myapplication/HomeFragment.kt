@@ -113,12 +113,12 @@ class HomeFragment : Fragment() {
     private fun popupWindow(){  /*電話をかけるかのポップアップウィンドウ表示*/
         AlertDialog.Builder(requireContext())
             .setTitle("ただいまお食事をしているようです!")
-            .setMessage("電話を掛けますか?")
+            .setMessage("Duoアプリに移動して電話を掛けますか?")
             .setPositiveButton("Yes", { dialog, which ->  /*電話をすると選択時*/
-                val intent = Intent(Intent.ACTION_MAIN)
-                intent.setAction("android.intent.category.LAUNCHER")
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.setClassName("com.google.android.apps.tachyon", "com.google.android.apps.tachyon.MainActivity"); /*Duoアプリに移動*/
+                val intent = Intent()
+                intent.setAction("com.google.android.apps.tachyon.action.CALL")
+                intent.setClassName("com.google.android.apps.tachyon", "com.google.android.apps.tachyon.ExternalCallActivity"); /*Duoアプリに移動*/
+                intent.setData(Uri.parse("tel:07038027280"))
                 try{
                     startActivity(intent)
                 } catch (e: Exception){
