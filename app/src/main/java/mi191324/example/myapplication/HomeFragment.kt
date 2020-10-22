@@ -90,6 +90,8 @@ class HomeFragment : Fragment() {
                     is Result.Failure -> {
                         val (user, err) = result
                         Log.d("No", "${user}")
+                        val myToast: Toast = Toast.makeText(getActivity(), "データのの受信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
@@ -122,7 +124,7 @@ class HomeFragment : Fragment() {
                 try{
                     startActivity(intent)
                 } catch (e: Exception){
-                    val Toast: Toast = Toast.makeText(getActivity(), "アプリが見つかりません", Toast.LENGTH_LONG) /*アプリが見つからなかった場合*/
+                    val Toast: Toast = Toast.makeText(getActivity(), "Duoアプリが見つかりません", Toast.LENGTH_LONG) /*アプリが見つからなかった場合*/
                     Toast.show()
                 }
             })
