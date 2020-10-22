@@ -73,6 +73,7 @@ class MessagecreateFragment : Fragment() {
                 e.printStackTrace()
             }
         }else {
+            messagecreateView.setText("停止します")
             try {
                 mp.stop()
                 mp.prepare()
@@ -118,7 +119,7 @@ class MessagecreateFragment : Fragment() {
                 mediaRecorder!!.start()
             }
         } else{
-            messagecreateView.setText("録音することができます")
+            messagecreateView.setText("ボタンを押して録音を開始")
             Timer.stop()
             try {
                 mediaRecorder!!.stop()
@@ -161,7 +162,7 @@ class MessagecreateFragment : Fragment() {
             }
         httpAsync.join()
         openDialog()
-    }
+}
 
     public fun openDialog(){
         val myToast: Toast = Toast.makeText(getActivity(), "送信しました", Toast.LENGTH_LONG)
@@ -181,14 +182,22 @@ class MessagecreateFragment : Fragment() {
         val playerBtn : Button = View.findViewById(R.id.playerBtn)
         val VoicesendBtn : Button = View.findViewById(R.id.VoisesendBtn)
         val Timer : Chronometer = View.findViewById(R.id.Timer)
+        playerBtn.setEnabled(false)
+        VoicesendBtn.setEnabled(false)
 
         recordingBtn.setOnClickListener(){
+            playerBtn.setEnabled(false)
+            VoicesendBtn.setEnabled(false)
             choose()
+            playerBtn.setEnabled(true)
+            VoicesendBtn.setEnabled(true)
         }
         playerBtn.setOnClickListener(){
             startPlay()
         }
         VoicesendBtn.setOnClickListener(){
+            playerBtn.setEnabled(false)
+            VoicesendBtn.setEnabled(false)
             sendvoice()
         }
 
