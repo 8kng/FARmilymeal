@@ -10,10 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Chronometer
-import android.widget.Toast
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -60,10 +57,11 @@ class MessagecreateFragment : Fragment() {
         }
     }
     private fun startPlay(){
-        messagecreateView.setText("再生します")
+        messagecreateView.setText("再生しています")
         recordFile = "filename.ogg"
         val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
         if (playerBtn.isChecked == true) {
+            textView.setText("停止")
             try {
                 mp = MediaPlayer()
                 mp.setDataSource(recordPath + "/" + recordFile)
@@ -73,7 +71,8 @@ class MessagecreateFragment : Fragment() {
                 e.printStackTrace()
             }
         }else {
-            messagecreateView.setText("停止します")
+            messagecreateView.setText("停止しています")
+            textView.setText("再生")
             try {
                 mp.stop()
                 mp.prepare()
@@ -103,6 +102,7 @@ class MessagecreateFragment : Fragment() {
             } else {
                 Timer.setBase(SystemClock.elapsedRealtime())
                 Timer.start()
+                playerBtn.setEnabled(false)
                 messagecreateView.setText("メッセージを録音しています")
                 recordFile = "filename.ogg"
                 val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
@@ -151,25 +151,25 @@ class MessagecreateFragment : Fragment() {
                 Log.d("hoge", result.toString())
                 when (result) {
                     is Result.Success -> {
+                        Timer.setBase(SystemClock.elapsedRealtime())
                         val data = result.get()
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                         println(data)
+                        playerBtn.setEnabled(false)
+                        VoisesendBtn.setEnabled(false)
+                        messagecreateView.setText("ボタンを押して録音を開始")
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
+                        val myToast: Toast = Toast.makeText(getActivity(), "データの受信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                         println(ex)
                     }
                 }
             }
         httpAsync.join()
-        openDialog()
 }
-
-    public fun openDialog(){
-        val myToast: Toast = Toast.makeText(getActivity(), "送信しました", Toast.LENGTH_LONG)
-        myToast.show()
-    }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -182,6 +182,7 @@ class MessagecreateFragment : Fragment() {
         val playerBtn : Button = View.findViewById(R.id.playerBtn)
         val VoicesendBtn : Button = View.findViewById(R.id.VoisesendBtn)
         val Timer : Chronometer = View.findViewById(R.id.Timer)
+        val playtext: TextView = View.findViewById(R.id.textView)
         playerBtn.setEnabled(false)
         VoicesendBtn.setEnabled(false)
 
@@ -196,8 +197,6 @@ class MessagecreateFragment : Fragment() {
             startPlay()
         }
         VoicesendBtn.setOnClickListener(){
-            playerBtn.setEnabled(false)
-            VoicesendBtn.setEnabled(false)
             sendvoice()
         }
 
