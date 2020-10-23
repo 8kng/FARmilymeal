@@ -10,7 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.Chronometer
+import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -153,17 +156,13 @@ class MessagecreateFragment : Fragment() {
                     is Result.Success -> {
                         Timer.setBase(SystemClock.elapsedRealtime())
                         val data = result.get()
-                        val myToast: Toast = Toast.makeText(getActivity(), "送信しました", Toast.LENGTH_LONG)
-                        myToast.show()
                         println(data)
-                        playerBtn.setEnabled(false)
                         VoisesendBtn.setEnabled(false)
-                        messagecreateView.setText("ボタンを押して録音を開始")
+                        messagecreateView.setText("メッセージを送信しました")
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
-                        val myToast: Toast = Toast.makeText(getActivity(), "データの受信に失敗しました", Toast.LENGTH_LONG)
-                        myToast.show()
+                        messagecreateView.setText("メッセージの送信に失敗しました")
                         println(ex)
                     }
                 }

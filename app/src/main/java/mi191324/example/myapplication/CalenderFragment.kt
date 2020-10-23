@@ -102,12 +102,16 @@ class CalenderFragment<Boolen> : Fragment() {
                 when(result){
                     is Result.Success -> {
                         val photo = result.get()
-                        val photouri:Uri = Uri.parse(photo)
-                        FirstView.setImageURI(photouri)
-                        Picasso.get()
-                            .load(photouri)
-                            .into(FirstView)
-                        Log.d("send", nowday_1)
+                        if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                            FirstView.setImageResource(R.drawable.noimage)
+                        }else{
+                            val photouri:Uri = Uri.parse(photo)
+                            FirstView.setImageURI(photouri)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(FirstView)
+                            Log.d("send", nowday_1)
+                        }
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -123,11 +127,15 @@ class CalenderFragment<Boolen> : Fragment() {
                 when(result){
                     is Result.Success -> {
                         val photo: String = result.get()
-                        val photouri:Uri = Uri.parse(photo)
-                        Picasso.get()
-                            .load(photouri)
-                            .into(SecondView)
-                        Log.d("send", nowday_2)
+                        if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                            SecondView.setImageResource(R.drawable.noimage)
+                        }else{
+                            val photouri:Uri = Uri.parse(photo)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(SecondView)
+                            Log.d("send", nowday_2)
+                        }
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -143,11 +151,16 @@ class CalenderFragment<Boolen> : Fragment() {
                 when(result){
                     is Result.Success -> {
                         val photo = result.get()
-                        val photouri:Uri = Uri.parse(photo)
-                        Picasso.get()
-                            .load(photouri)
-                            .into(ThirdView)
-                        Log.d("send", nowday_3)
+                        if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                            ThirdView.setImageResource(R.drawable.noimage)
+                        }else{
+                            val photouri:Uri = Uri.parse(photo)
+                            FirstView.setImageURI(photouri)
+                            Picasso.get()
+                                .load(photouri)
+                                .into(ThirdView)
+                            Log.d("send", nowday_1)
+                        }
                     }
                     is Result.Failure -> {
                         Log.d("miss", "miss")
@@ -175,11 +188,16 @@ class CalenderFragment<Boolen> : Fragment() {
                     when (result) {
                         is Result.Success -> {
                             val photo = result.get()
-                            val photouri:Uri = Uri.parse(photo)
-                            Picasso.get()
-                                .load(photouri)
-                                .into(FirstView)
-                            Log.d("send", selectday_1)
+                            if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                                FirstView.setImageResource(R.drawable.noimage)
+                            }else{
+                                val photouri:Uri = Uri.parse(photo)
+                                FirstView.setImageURI(photouri)
+                                Picasso.get()
+                                    .load(photouri)
+                                    .into(FirstView)
+                                Log.d("send", nowday_1)
+                            }
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -195,11 +213,16 @@ class CalenderFragment<Boolen> : Fragment() {
                     when (result) {
                         is Result.Success -> {
                             val photo = result.get()
-                            val photouri:Uri = Uri.parse(photo)
-                            Picasso.get()
-                                .load(photouri)
-                                .into(SecondView)
-                            Log.d("send", selectday_2)
+                            if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                                SecondView.setImageResource(R.drawable.noimage)
+                            }else{
+                                val photouri:Uri = Uri.parse(photo)
+                                SecondView.setImageURI(photouri)
+                                Picasso.get()
+                                    .load(photouri)
+                                    .into(SecondView)
+                                Log.d("send", nowday_1)
+                            }
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
@@ -215,11 +238,16 @@ class CalenderFragment<Boolen> : Fragment() {
                     when (result) {
                         is Result.Success -> {
                             val photo = result.get()
-                            val photouri:Uri = Uri.parse(photo)
-                            Picasso.get()
-                                .load(photouri)
-                                .into(SecondView)
-                            Log.d("send", selectday_3)
+                            if (photo == "https://storage.googleapis.com/meal_phot/Noimage.jpg"){
+                                ThirdView.setImageResource(R.drawable.noimage)
+                            }else{
+                                val photouri:Uri = Uri.parse(photo)
+                                ThirdView.setImageURI(photouri)
+                                Picasso.get()
+                                    .load(photouri)
+                                    .into(ThirdView)
+                                Log.d("send", nowday_1)
+                            }
                         }
                         is Result.Failure -> {
                             Log.d("miss", "miss")
