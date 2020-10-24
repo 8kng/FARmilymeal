@@ -73,7 +73,6 @@ class QuestioncreateFragment : Fragment(){
         val messagesendBtn3: Button = View.findViewById(R.id.messagesendBtn3)
         val messagesendBtn4: Button = View.findViewById(R.id.messagesendBtn4)
         val messagesendBtn5: Button = View.findViewById(R.id.messagesendBtn5)
-
         if (allow1.isChecked == false){
             Question1editor.setEnabled(false)
         }
@@ -150,17 +149,18 @@ class QuestioncreateFragment : Fragment(){
                     is com.github.kittinunf.result.Result.Success -> {
                         val data = result.get()
                         Log.d("responce", data)
+                        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
                         Log.d("response", ex.toString())
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
         httpAsync.join()
-        /*送信完了したことを伝える*/
-        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-        myToast.show()
         /*入力したものの保存*/
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
@@ -187,17 +187,18 @@ class QuestioncreateFragment : Fragment(){
                     is com.github.kittinunf.result.Result.Success -> {
                         val data = result.get()
                         Log.d("responce", data)
+                        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
                         Log.d("response", ex.toString())
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
         httpAsync.join()
-        /*送信完了したことを伝える*/
-        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-        myToast.show()
     }
     private fun saveDate3(){
         val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
@@ -218,17 +219,18 @@ class QuestioncreateFragment : Fragment(){
                     is com.github.kittinunf.result.Result.Success -> {
                         val data = result.get()
                         Log.d("responce", data)
+                        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
                         Log.d("response", ex.toString())
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
         httpAsync.join()
-        /*送信完了したことを伝える*/
-        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-        myToast.show()
     }
     private fun saveDate4(){
         val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
@@ -249,17 +251,18 @@ class QuestioncreateFragment : Fragment(){
                     is com.github.kittinunf.result.Result.Success -> {
                         val data = result.get()
                         Log.d("responce", data)
+                        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
                         Log.d("response", ex.toString())
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
         httpAsync.join()
-        /*送信完了したことを伝える*/
-        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-        myToast.show()
     }
     private fun saveDate5(){
         val baseUrl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyquestion"
@@ -280,44 +283,93 @@ class QuestioncreateFragment : Fragment(){
                     is com.github.kittinunf.result.Result.Success -> {
                         val data = result.get()
                         Log.d("responce", data)
+                        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                     is Result.Failure -> {
                         val ex = result.getException()
                         Log.d("response", ex.toString())
+                        val myToast: Toast = Toast.makeText(getActivity(), "送信に失敗しました", Toast.LENGTH_LONG)
+                        myToast.show()
                     }
                 }
             }
         httpAsync.join()
-        /*送信完了したことを伝える*/
-        val myToast: Toast = Toast.makeText(getActivity(), "質問を送信しました", Toast.LENGTH_LONG)
-        myToast.show()
     }
     private fun allow1method(){
         if (textallowBtn1.isChecked == false){
             Question1editor.setEnabled(false)
         } else{
+            Question5editor.setEnabled(false)
+            Question4editor.setEnabled(false)
+            Question3editor.setEnabled(false)
+            Question2editor.setEnabled(false)
             Question1editor.setEnabled(true)
+            val iet = Question1editor.getSelectionStart()
+            Question1editor.setFocusableInTouchMode(true)
+            Question2editor.setFocusableInTouchMode(false)
+            Question3editor.setFocusableInTouchMode(false)
+            Question4editor.setFocusableInTouchMode(false)
+            Question5editor.setFocusableInTouchMode(false)
+            Question1editor.requestFocus(View.FOCUS_UP)
+            Question1editor.setSelection(iet)
         }
     }
     private fun allow2method(){
         if (textallowBtn2.isChecked == false){
             Question2editor.setEnabled(false)
         } else{
+            Question5editor.setEnabled(false)
+            Question4editor.setEnabled(false)
+            Question3editor.setEnabled(false)
             Question2editor.setEnabled(true)
+            Question1editor.setEnabled(false)
+            val iet = Question2editor.getSelectionStart()
+            Question1editor.setFocusableInTouchMode(false)
+            Question2editor.setFocusableInTouchMode(true)
+            Question3editor.setFocusableInTouchMode(false)
+            Question4editor.setFocusableInTouchMode(false)
+            Question5editor.setFocusableInTouchMode(false)
+            Question2editor.requestFocus(View.FOCUS_UP)
+            Question2editor.setSelection(iet)
         }
     }
     private fun allow3method(){
         if (textallowBtn3.isChecked == false){
             Question3editor.setEnabled(false)
         } else{
+            Question5editor.setEnabled(false)
+            Question4editor.setEnabled(false)
             Question3editor.setEnabled(true)
+            Question2editor.setEnabled(false)
+            Question1editor.setEnabled(false)
+            val iet = Question3editor.getSelectionStart()
+            Question1editor.setFocusableInTouchMode(false)
+            Question2editor.setFocusableInTouchMode(false)
+            Question3editor.setFocusableInTouchMode(true)
+            Question4editor.setFocusableInTouchMode(false)
+            Question5editor.setFocusableInTouchMode(false)
+            Question3editor.requestFocus(View.FOCUS_UP)
+            Question3editor.setSelection(iet)
         }
     }
     private fun allow4method(){
         if (textallowBtn4.isChecked == false){
             Question4editor.setEnabled(false)
         } else{
+            Question5editor.setEnabled(false)
             Question4editor.setEnabled(true)
+            Question3editor.setEnabled(false)
+            Question2editor.setEnabled(false)
+            Question1editor.setEnabled(false)
+            val iet = Question4editor.getSelectionStart()
+            Question1editor.setFocusableInTouchMode(false)
+            Question2editor.setFocusableInTouchMode(false)
+            Question3editor.setFocusableInTouchMode(false)
+            Question4editor.setFocusableInTouchMode(true)
+            Question5editor.setFocusableInTouchMode(false)
+            Question4editor.requestFocus(View.FOCUS_UP)
+            Question4editor.setSelection(iet)
         }
     }
     private fun allow5method(){
@@ -325,6 +377,18 @@ class QuestioncreateFragment : Fragment(){
             Question5editor.setEnabled(false)
         } else{
             Question5editor.setEnabled(true)
+            Question4editor.setEnabled(false)
+            Question3editor.setEnabled(false)
+            Question2editor.setEnabled(false)
+            Question1editor.setEnabled(false)
+            val iet = Question5editor.getSelectionStart()
+            Question1editor.setFocusableInTouchMode(false)
+            Question2editor.setFocusableInTouchMode(false)
+            Question3editor.setFocusableInTouchMode(false)
+            Question4editor.setFocusableInTouchMode(false)
+            Question5editor.setFocusableInTouchMode(true)
+            Question5editor.requestFocus(View.FOCUS_UP)
+            Question5editor.setSelection(iet)
         }
     }
 
