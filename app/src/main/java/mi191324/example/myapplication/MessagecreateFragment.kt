@@ -10,10 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Chronometer
-import android.widget.TextView
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -182,6 +179,8 @@ class MessagecreateFragment : Fragment() {
         val VoicesendBtn : Button = View.findViewById(R.id.VoisesendBtn)
         val Timer : Chronometer = View.findViewById(R.id.Timer)
         val playtext: TextView = View.findViewById(R.id.textView)
+        val progre: ProgressBar = View.findViewById(R.id.progress)
+        progre.setVisibility(android.widget.ProgressBar.INVISIBLE)
         playerBtn.setEnabled(false)
         VoicesendBtn.setEnabled(false)
 
@@ -196,7 +195,9 @@ class MessagecreateFragment : Fragment() {
             startPlay()
         }
         VoicesendBtn.setOnClickListener(){
+            progre.setVisibility(android.widget.ProgressBar.VISIBLE)
             sendvoice()
+            progre.setVisibility(android.widget.ProgressBar.INVISIBLE)
         }
 
         return View

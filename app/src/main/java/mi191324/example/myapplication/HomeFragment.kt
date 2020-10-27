@@ -74,11 +74,10 @@ class HomeFragment : Fragment() {
                         val res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)
                         recycler_view.adapter = HomeAdpter(res!!.photos)
 
-                        val time1_be:Date = format.parse(res.photos[0].datetime)
-                        val time2:Date = format.parse(day)
+                        val time1_be:Date = format.parse(day)
+                        val time2:Date = format.parse(res.photos[0].datetime)
                         calendar1.setTime(time1_be)
                         calendar1.add(Calendar.MINUTE, 20)
-                        calendar1.add(Calendar.DATE, 1)
                         val time1_af = calendar1.getTime()
                         Log.d("始まり", time1_be.toString())
                         Log.d("現在", time2.toString())
