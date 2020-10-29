@@ -19,11 +19,15 @@ class HomeAdpter(private val photoList: List<HomeFragment.Photo>) : RecyclerView
     }
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
         val currentItem = photoList[position]
+        val calendar1 = Calendar.getInstance()
         val Uri = Uri.parse(currentItem.url)
         val format = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
         val datetime: Date = format.parse(currentItem.datetime)
+        calendar1.setTime(datetime)
+        calendar1.add(Calendar.HOUR, 21)
         val df = SimpleDateFormat("yyyy年MM月dd日HH時mm分ss分に\n届きました")
-        val datestr = df.format(datetime)
+        val gettime = calendar1.getTime()
+        val datestr = df.format(gettime)
 
         Picasso.get()
             .load(Uri)

@@ -70,6 +70,7 @@ class HomeFragment : Fragment() {
         val format = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
         val day = format.format(Date())
         val calendar1 = Calendar.getInstance()
+        val calender2 = Calendar.getInstance()
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val number = pref.getString("number", "")
 
@@ -84,16 +85,20 @@ class HomeFragment : Fragment() {
                         val res = moshi.adapter(PhotoListResponse::class.java).fromJson(data)
                         recycler_view.adapter = HomeAdpter(res!!.photos)
 
-                        val time1_be: Date = format.parse(day)
-                        val time2: Date = format.parse(res.photos[0].datetime)
-                        calendar1.setTime(time1_be)
+                        val date: Date = format.parse(day)
+                        calender2.setTime(format.parse(res.photos[0].datetime))
+                        calender2.add(Calendar.HOUR, 21)
+                        val time2: Date = calender2.getTime()
+                        calendar1.setTime(date)
+                        calendar1.add(Calendar.HOUR, 12)
+                        val time1_be = calendar1.getTime()
                         calendar1.add(Calendar.MINUTE, 20)
                         val time1_af = calendar1.getTime()
                         Log.d("始まり", time1_be.toString())
                         Log.d("現在", time2.toString())
                         Log.d("終わり", time1_af.toString())
                         if ((time1_be <= time2) && (time1_af >= time2)) {
-                            popupWindow()
+                            popupWindow(number)
                         }
                     }
                     is Result.Failure -> {
@@ -115,8 +120,6 @@ class HomeFragment : Fragment() {
 
         FAB.setOnClickListener{ view ->
             phonenumber(number)
-            val myToast: Toast = Toast.makeText(getActivity(), number, Toast.LENGTH_LONG)
-            myToast.show()
         }
 
         return View
@@ -152,17 +155,11 @@ class HomeFragment : Fragment() {
             imm.hideSoftInputFromWindow(myedit.getWindowToken(), 0)
             dialog.dismiss()
         })
-        dialog.setNegativeButton("No", { dialog, which ->  /*電話しないと選択時*/
-            dialog.dismiss()
-            val imm = getActivity()?.getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            ) as InputMethodManager
-            imm.hideSoftInputFromWindow(myedit.getWindowToken(), 0)
-        })
         dialog.show()
     }
 
-    private fun popupWindow(){/*電話をかけるかのポップアップウィンドウ表示*/
+    private fun popupWindow(phone: String?){/*電話をかけるかのポップアップウィンドウ表示*/
+        val number = "tel" + phone
         AlertDialog.Builder(requireContext())
             .setTitle("ただいまお食事をしているようです!")
             .setMessage("Duoアプリに移動して電話を掛けますか?")
@@ -173,7 +170,7 @@ class HomeFragment : Fragment() {
                     "com.google.android.apps.tachyon",
                     "com.google.android.apps.tachyon.ExternalCallActivity"
                 ); /*Duoアプリに移動*/
-                intent.setData(Uri.parse("tel:"))
+                intent.setData(Uri.parse(number))
                 try {
                     startActivity(intent)
                 } catch (e: Exception) {
