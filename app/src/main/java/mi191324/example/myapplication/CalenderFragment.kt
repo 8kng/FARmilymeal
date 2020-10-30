@@ -109,6 +109,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             FirstView.setImageURI(photouri)
                             Picasso.get()
                                 .load(photouri)
+                                .fit()
                                 .into(FirstView)
                             Log.d("send", nowday_1)
                         }
@@ -133,6 +134,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             val photouri:Uri = Uri.parse(photo)
                             Picasso.get()
                                 .load(photouri)
+                                .fit()
                                 .into(SecondView)
                             Log.d("send", nowday_2)
                         }
@@ -158,6 +160,7 @@ class CalenderFragment<Boolen> : Fragment() {
                             FirstView.setImageURI(photouri)
                             Picasso.get()
                                 .load(photouri)
+                                .fit()
                                 .into(ThirdView)
                             Log.d("send", nowday_1)
                         }
@@ -195,6 +198,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 FirstView.setImageURI(photouri)
                                 Picasso.get()
                                     .load(photouri)
+                                    .fit()
                                     .into(FirstView)
                                 Log.d("send", nowday_1)
                             }
@@ -220,6 +224,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 SecondView.setImageURI(photouri)
                                 Picasso.get()
                                     .load(photouri)
+                                    .fit()
                                     .into(SecondView)
                                 Log.d("send", nowday_1)
                             }
@@ -245,6 +250,7 @@ class CalenderFragment<Boolen> : Fragment() {
                                 ThirdView.setImageURI(photouri)
                                 Picasso.get()
                                     .load(photouri)
+                                    .fit()
                                     .into(ThirdView)
                                 Log.d("send", nowday_1)
                             }
