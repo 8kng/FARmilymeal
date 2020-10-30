@@ -1,266 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".QuestioncreateFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15sp"
-        android:text="質問編集画面"
-        android:textColor="#4a4a4a"
-        android:textSize="20sp" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp"
-        android:background="@drawable/layout_border"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/Question1editor"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Title 1"
-                android:imeOptions="actionDone"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:inputType="text"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15sp"
+                    android:text="質問編集画面"
+                    android:textColor="#4a4a4a"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ToggleButton
-            android:id="@+id/textallowBtn1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/ic_baseline_edit_24" />
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="550sp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <Button
-            android:id="@+id/messagesendBtn1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_send_gray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="horizontal">
 
-    </LinearLayout>
+                        <EditText
+                            android:id="@+id/Question1editor"
+                            android:layout_width="250sp"
+                            android:layout_height="50sp"
+                            android:layout_marginLeft="10dp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="Title 1"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/layout_border"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
+                        <ToggleButton
+                            android:id="@+id/textallowBtn1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_baseline_edit_24"
+                            android:textOff=""
+                            android:textOn="" />
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/messagesendBtn1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_send_gray" />
 
-            <EditText
-                android:id="@+id/Question2editor"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Title 2"
-                android:imeOptions="actionDone"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="DuplicateIds"
-                android:inputType="text"/>
+                    </LinearLayout>
 
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="horizontal">
 
-        <ToggleButton
-            android:id="@+id/textallowBtn2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/ic_baseline_edit_24" />
+                        <EditText
+                            android:id="@+id/Question2editor"
+                            android:layout_width="250sp"
+                            android:layout_height="50sp"
+                            android:layout_marginLeft="10dp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="Title 2"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/messagesendBtn2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_send_gray" />
+                        <ToggleButton
+                            android:id="@+id/textallowBtn2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_baseline_edit_24"
+                            android:textOff=""
+                            android:textOn="" />
 
-    </LinearLayout>
+                        <Button
+                            android:id="@+id/messagesendBtn2"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_send_gray" />
 
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/layout_border"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
+                    </LinearLayout>
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/Question3editor"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Title 3"
-                android:imeOptions="actionDone"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="DuplicateIds"
-                android:inputType="text"/>
+                        <EditText
+                            android:id="@+id/Question3editor"
+                            android:layout_width="250sp"
+                            android:layout_height="50sp"
+                            android:layout_marginLeft="10dp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="Title 3"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-        </LinearLayout>
+                        <ToggleButton
+                            android:id="@+id/textallowBtn3"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_baseline_edit_24"
+                            android:textOff=""
+                            android:textOn="" />
 
-        <ToggleButton
-            android:id="@+id/textallowBtn3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/ic_baseline_edit_24" />
+                        <Button
+                            android:id="@+id/messagesendBtn3"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_send_gray" />
 
-        <Button
-            android:id="@+id/messagesendBtn3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_send_gray" />
+                    </LinearLayout>
 
-    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="horizontal">
 
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/layout_border"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
+                        <EditText
+                            android:id="@+id/Question4editor"
+                            android:layout_width="250sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="Title 4"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                        <ToggleButton
+                            android:id="@+id/textallowBtn4"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_baseline_edit_24"
+                            android:textOff=""
+                            android:textOn="" />
 
-            <EditText
-                android:id="@+id/Question4editor"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Title 3"
-                android:imeOptions="actionDone"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="DuplicateIds"
-                android:inputType="text"/>
+                        <Button
+                            android:id="@+id/messagesendBtn4"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_send_gray" />
 
-        </LinearLayout>
+                    </LinearLayout>
 
-        <ToggleButton
-            android:id="@+id/textallowBtn4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/ic_baseline_edit_24" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/messagesendBtn4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_send_gray" />
+                        <EditText
+                            android:id="@+id/Question5editor"
+                            android:layout_width="250sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:text="Title 5"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="DuplicateIds" />
 
-    </LinearLayout>
+                        <ToggleButton
+                            android:id="@+id/textallowBtn5"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_baseline_edit_24"
+                            android:textOff=""
+                            android:textOn="" />
 
-    <LinearLayout
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/layout_border"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="7dp">
+                        <Button
+                            android:id="@+id/messagesendBtn5"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10sp"
+                            android:background="@drawable/ic_send_gray" />
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/Question5editor"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Title 5"
-                android:imeOptions="actionDone"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="DuplicateIds"
-                android:inputType="text"/>
-
-        </LinearLayout>
-
-        <ToggleButton
-            android:id="@+id/textallowBtn5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:textOff=""
-            android:textOn=""
-            android:background="@drawable/ic_baseline_edit_24" />
-
-        <Button
-            android:id="@+id/messagesendBtn5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/ic_send_gray" />
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

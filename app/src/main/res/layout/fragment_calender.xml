@@ -39,35 +39,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="0dp"
-                android:layout_height="280sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarView">
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView">
 
                     <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="200sp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -75,96 +62,110 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:id="@+id/FirstView"
+                            <LinearLayout
+                                android:id="@+id/linearLayout2"
+                                android:layout_width="200sp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:id="@+id/FirstView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        app:layout_constraintBottom_toTopOf="@+id/SecondView"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/SecondView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        android:src="@android:drawable/ic_menu_gallery"
+                                        app:layout_constraintBottom_toTopOf="@+id/ThirdView"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/FirstView" />
+
+                                    <ImageView
+                                        android:id="@+id/ThirdView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        android:src="@android:drawable/ic_menu_gallery"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/SecondView" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout3"
                                 android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                app:layout_constraintBottom_toTopOf="@+id/SecondView"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="250dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/FirstText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        android:text="朝ごはん"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/SecondText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        android:text="昼ごはん"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/FirstText" />
+
+                                    <TextView
+                                        android:id="@+id/ThirdText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100sp"
+                                        android:text="夜ごはん"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/SecondText" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progress"
+                                style="?android:attr/progressBarStyleLarge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="30sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <ImageView
-                                android:id="@+id/SecondView"
-                                android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                android:src="@android:drawable/ic_menu_gallery"
-                                app:layout_constraintBottom_toTopOf="@+id/ThirdView"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/FirstView" />
-
-                            <ImageView
-                                android:id="@+id/ThirdView"
-                                android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                android:src="@android:drawable/ic_menu_gallery"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/SecondView" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="250dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/FirstText"
-                                android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                android:text="朝ごはん"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/SecondText"
-                                android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                android:text="昼ごはん"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/FirstText" />
-
-                            <TextView
-                                android:id="@+id/ThirdText"
-                                android:layout_width="match_parent"
-                                android:layout_height="100sp"
-                                android:text="夜ごはん"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/SecondText" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progress"
-                        style="?android:attr/progressBarStyleLarge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="30sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,5 +173,4 @@
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
