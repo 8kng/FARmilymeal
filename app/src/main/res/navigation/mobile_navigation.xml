@@ -25,4 +25,9 @@
         android:name="mi191324.example.myapplication.NotificationFragment"
         android:label="@string/notification_text"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/nowloadFragment"
+        android:name="mi191324.example.myapplication.NowloadFragment"
+        android:label="fragment_nowload"
+        tools:layout="@layout/fragment_nowload" />
 </navigation>

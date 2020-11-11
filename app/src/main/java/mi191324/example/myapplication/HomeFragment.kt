@@ -65,9 +65,10 @@ class HomeFragment : Fragment() {
         val recycler_view : RecyclerView = View.findViewById(R.id.recycler_me)
         val FAB : FloatingActionButton = View.findViewById(R.id.FAB)
 
-        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/photolist"
+        val httpurl = "https://asia-northeast1-farmily-meal.cloudfunctions.net/familyphoto_n"
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val format = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss")
+        val fomat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
         val day = format.format(Date())
         val calendar1 = Calendar.getInstance()
         val calender2 = Calendar.getInstance()
@@ -86,18 +87,19 @@ class HomeFragment : Fragment() {
                         recycler_view.adapter = HomeAdpter(res!!.photos)
 
                         val date: Date = format.parse(day)
-                        calender2.setTime(format.parse(res.photos[0].datetime))
-                        calender2.add(Calendar.HOUR, 21)
+                        calender2.setTime(format.parse(res.photos[0].DateTime))
+                        calender2.add(Calendar.HOUR, 13)
+                        calender2.add(Calendar.MINUTE, -19)
                         val time2: Date = calender2.getTime()
                         calendar1.setTime(date)
                         calendar1.add(Calendar.HOUR, 12)
                         val time1_be = calendar1.getTime()
-                        calendar1.add(Calendar.MINUTE, 20)
+                        calendar1.add(Calendar.MINUTE, -20)
                         val time1_af = calendar1.getTime()
                         Log.d("始まり", time1_be.toString())
                         Log.d("現在", time2.toString())
                         Log.d("終わり", time1_af.toString())
-                        if ((time1_be <= time2) && (time1_af >= time2)) {
+                        if ((time1_be >= time2) && (time1_af <= time2)) {
                             popupWindow(number)
                         }
                     }
@@ -126,9 +128,9 @@ class HomeFragment : Fragment() {
     }
 
     data class Photo(
-        var id: Int,
-        var url: String,
-        var datetime: String
+        var DateTime: String,
+        var ID: Int,
+        var url: String
     )
 
     data class PhotoListResponse(
